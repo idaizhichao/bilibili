@@ -1,0 +1,275 @@
+{
+  "id": "1521640",
+  "name": "bilibili",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "690196",
+      "name": "动态",
+      "font_class": "iconfontdongtai",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "776141",
+      "name": "赞",
+      "font_class": "zan",
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
+    },
+    {
+      "icon_id": "992445",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "1067012",
+      "name": "手机",
+      "font_class": "phone",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "1658315",
+      "name": "小黑屋",
+      "font_class": "xiaoheiwu",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "2041685",
+      "name": "CN_bilibili B",
+      "font_class": "CN_bilibiliB",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "2151794",
+      "name": "国创",
+      "font_class": "guochuang",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "2151837",
+      "name": "番剧",
+      "font_class": "fanju",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "2154213",
+      "name": "播放数_32",
+      "font_class": "bofangshu",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "2154214",
+      "name": "UP主_32",
+      "font_class": "UPzhu",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "2306764",
+      "name": "BILIBILI_LOGO",
+      "font_class": "bilibili",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "2377004",
+      "name": "私信",
+      "font_class": "sixin",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "2377047",
+      "name": "历史记录",
+      "font_class": "lishijilu",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "2377186",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "2377195",
+      "name": "稍后再看",
+      "font_class": "shaohouzaikan",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "2377198",
+      "name": "主题",
+      "font_class": "zhuti",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "2508788",
+      "name": "电视剧-01",
+      "font_class": "dianshiju-",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    },
+    {
+      "icon_id": "2508790",
+      "name": "电视剧",
+      "font_class": "dianshiju",
+      "unicode": "e6d5",
+      "unicode_decimal": 59093
+    },
+    {
+      "icon_id": "2508792",
+      "name": "电影",
+      "font_class": "dianying",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "2508793",
+      "name": "广告",
+      "font_class": "guanggao",
+      "unicode": "e6d7",
+      "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "2508795",
+      "name": "鬼畜",
+      "font_class": "guixu",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "2508796",
+      "name": "番剧推荐",
+      "font_class": "fanjutuijian",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "2508797",
+      "name": "国产动画推荐",
+      "font_class": "guochandonghuatuijian",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "2508799",
+      "name": "生活",
+      "font_class": "shenghuo",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "2508803",
+      "name": "我的追番",
+      "font_class": "wodezhuifan",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "2508806",
+      "name": "游戏",
+      "font_class": "youxi",
+      "unicode": "e6de",
+      "unicode_decimal": 59102
+    },
+    {
+      "icon_id": "2508807",
+      "name": "直播",
+      "font_class": "zhibo",
+      "unicode": "e6df",
+      "unicode_decimal": 59103
+    },
+    {
+      "icon_id": "4427409",
+      "name": "音乐",
+      "font_class": "tubiaozhizuomobanyihuifu-",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "6830065",
+      "name": "专栏",
+      "font_class": "zhuanlan",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "6866627",
+      "name": "宣传推广",
+      "font_class": "xuanchuantuiguang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7416849",
+      "name": "右箭头",
+      "font_class": "jiantou",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "8361840",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "9924824",
+      "name": "活动",
+      "font_class": "huodong",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "10014477",
+      "name": "赛事",
+      "font_class": "saishi",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "10056840",
+      "name": "专题",
+      "font_class": "zhuanti",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "10918077",
+      "name": "bilibili-fill",
+      "font_class": "bilibili-fill",
+      "unicode": "e75c",
+      "unicode_decimal": 59228
+    },
+    {
+      "icon_id": "11124956",
+      "name": "首页",
+      "font_class": "1",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "11806640",
+      "name": "排行榜",
+      "font_class": "paihangbang",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    }
+  ]
+}
