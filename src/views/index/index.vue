@@ -55,27 +55,17 @@
       :rId="5"
     >
     </Partition>
-    <Partition :title="'番剧'" :icon="'&#xe60b;'" :conHeight="376">
+    <Partition
+      :title="'番剧'"
+      :icon="'&#xe60b;'"
+      :conHeight="376"
+      :rId="1"
+      :isTimeLine="true"
+      :isTabSwitch="true"
+    >
       <template v-slot:custom>
         <div class="game-custom">
           <a href="#"> 新番播放时间<i class="iconfont">&#xe644;</i> </a>
-        </div>
-      </template>
-      <template v-slot:card>
-        <div class="customCard">
-          <div class="item" v-for="item in lists" :key="item">
-            <div class="item-img">
-              <img
-                src="//i0.hdslb.com/bfs/bangumi/b919ca54abfa2aaed952f197da67211118944923.jpg@70w_70h_1c_100q.webp"
-              />
-            </div>
-            <div class="item-txt">
-              <a class="title" href="#" target="_blank" title="超级小白"
-                >超级小白</a
-              >
-              <span><a href="#"> 第八话</a></span>
-            </div>
-          </div>
         </div>
       </template>
     </Partition>
@@ -83,7 +73,7 @@
       :title="'番剧动态'"
       :icon="'&#xe6de;'"
       :iconColor="'#58D598'"
-      :rId="36"
+      :rId="1"
     >
     </Partition>
   </div>
@@ -134,7 +124,8 @@ a:visited {
     border: 1px solid $hoverColor;
     color: $hoverColor;
     font-size: 14px;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 112px;
     height: 30px;
     line-height: 30px;
@@ -148,40 +139,6 @@ a:visited {
     &:hover {
       color: white;
       background-color: $hoverColor;
-    }
-  }
-}
-.customCard {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  .item {
-    width: 232px;
-    height: 70px;
-    margin: 0 30px 24px 0;
-    display: flex;
-    justify-content: space-between;
-    .item-image {
-      width: 70px;
-      height: 70px;
-    }
-    .item-txt {
-      width: 152px;
-      display: flex;
-      flex-direction: column;
-      .title {
-        height: 37px;
-        margin: 2px 0 12px;
-        font-size: 14px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-      }
-      span a {
-        font-size: 12px;
-        color: $hoverColor;
-      }
     }
   }
 }

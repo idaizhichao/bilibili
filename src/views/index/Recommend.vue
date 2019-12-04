@@ -3,7 +3,7 @@
     <div class="frist space-between">
       <div class="loop-box">
         <img
-          src="//i0.hdslb.com/bfs/archive/409520eb4d725596a8a9c6960c8b0a5355939c78.jpg@1100w_484h_1c_100q.jpg"
+          src="https://i0.hdslb.com/bfs/sycp/creative_img/201911/1a9d23b9d64f80ecf5bf5e1526152125.jpg@1100w_484h_1c_100q.jpg"
         />
       </div>
       <div class="recommend-box">
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { Carousel } from "@/components";
+console.log(Carousel);
 export default {
   name: "Recommend",
   data() {
