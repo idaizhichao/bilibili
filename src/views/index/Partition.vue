@@ -34,8 +34,12 @@
           </div>
         </slot>
       </header>
-      <div class="l-con" :style="'height:' + conHeight + 'px'">
-        <div v-if="!isTimeLine">
+      <div>
+        <div
+          v-if="!isTimeLine"
+          class="l-con"
+          :style="'height:' + conHeight + 'px'"
+        >
           <commend-card
             v-for="item in dynamic.archives"
             :key="item.aid"

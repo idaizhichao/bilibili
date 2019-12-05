@@ -66,7 +66,7 @@ export default {
       let hour = Math.floor(branch / 60);
       branch >= 60 ? (branch %= 60) : branch;
       if (value < 60) {
-        seconds = seconds > 10 ? seconds : "0" + seconds;
+        seconds = ("0" + branch).slice(-2);
         return "00:" + seconds;
       }
       let result = "";
@@ -74,8 +74,8 @@ export default {
         result += hour + ":";
       }
       if (branch > 0) {
-        branch = branch > 10 ? branch : "0" + branch;
-        seconds = seconds > 10 ? seconds : "0" + seconds;
+        branch = ("0" + branch).slice(-2);
+        seconds = ("0" + branch).slice(-2);
         result += branch + ":" + seconds;
       }
       return result;
@@ -91,7 +91,6 @@ export default {
   methods: {
     handleMousemove(el) {
       const value = el.offsetX / el.toElement.scrollWidth;
-      console.log(el);
       const progress = parseFloat(value).toFixed(2) * 100;
       let number = Math.round(progress / 5) - 1;
       this.progress = progress;
