@@ -215,11 +215,12 @@ export default {
     handleTabSwitch(week) {
       console.log(week);
       let length = week;
-      if (week === 7) {
+      week -= 1;
+      if (week === 6) {
         week = 0;
       }
-      this.checkedWeek = length;
       this.lists = this.timeLine[week];
+      this.checkedWeek = length;
     },
     // 获取时间线数据
     getTimeLine(types) {
