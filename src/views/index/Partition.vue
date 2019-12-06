@@ -9,14 +9,12 @@
           >
           <div class="table-switch" v-if="isTimeLine">
             <div
-              :class="
-                'item ' + (item.day_of_week === checkedWeek ? 'item-on' : '')
-              "
-              @click="handleTabSwitch(item.day_of_week)"
-              v-for="item in timeLine"
+              :class="'item ' + (index + 1 === checkedWeek ? 'item-on' : '')"
+              @click="handleTabSwitch(index + 1)"
+              v-for="(item, index) in timeLine"
               :key="item.date"
             >
-              {{ item.day_of_week | week }}
+              {{ index | week }}
             </div>
           </div>
         </div>
@@ -66,7 +64,7 @@
           :key="item.aid"
         >
           <span :class="'number ' + (index < 3 ? 'top-three' : '')">
-            {{ index + 1 }}
+            {{ index }}
           </span>
           <a
             target="_blank"
@@ -170,19 +168,19 @@ export default {
   filters: {
     week(value) {
       switch (value) {
-        case 1:
+        case 0:
           return "星期一";
-        case 2:
+        case 1:
           return "星期二";
-        case 3:
+        case 2:
           return "星期三";
-        case 4:
+        case 3:
           return "星期四";
-        case 5:
+        case 4:
           return "星期五";
-        case 6:
+        case 5:
           return "星期六";
-        case 7:
+        case 6:
           return "星期天";
       }
     }
@@ -214,13 +212,14 @@ export default {
     // 处理切换日期点击
     handleTabSwitch(week) {
       console.log(week);
-      let length = week;
-      week -= 1;
-      if (week === 6) {
-        week = 0;
-      }
-      this.lists = this.timeLine[week];
-      this.checkedWeek = length;
+      this.timeLine.map((item, index) => {
+        if (item.day_of_week === week) {
+          console.log(index);
+          this.lists = this.timeLine[index];
+          this.checkedWeek = week;
+          return;
+        }
+      });
     },
     // 获取时间线数据
     getTimeLine(types) {
