@@ -26,9 +26,7 @@
       </div>
     </div>
     <div class="contribute">
-      <span>
-        <a>投稿</a>
-      </span>
+      <a href="#"><span>投稿</span></a>
     </div>
   </div>
 </template>
@@ -76,10 +74,12 @@ export default {
   margin-left: 20px;
   width: 100px;
   height: 36px;
+  a {
+    color: white;
+  }
   span {
     display: block;
     background-color: #fb7299;
-    color: white;
     font-size: 15px;
     line-height: 36px;
     height: 36px;

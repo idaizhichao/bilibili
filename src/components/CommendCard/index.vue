@@ -1,7 +1,7 @@
 <template>
   <div class="l-con-box">
     <div class="con-image">
-      <a href="#" class="fenmian">
+      <a :href="'/player/av' + data.aid" class="fenmian" target="_blank">
         <img :src="data.pic + '@206w_116h_1c_100q.webp'" />
         <div class="count">
           <div class="left">
@@ -52,35 +52,6 @@ export default {
     data: Object,
     require
   },
-  filters: {
-    number: value => {
-      if (value < 10000) {
-        return value;
-      } else {
-        return (value / 10000).toFixed(1) + "万";
-      }
-    },
-    time: value => {
-      let seconds = value % 60;
-      let branch = Math.floor(value / 60);
-      let hour = Math.floor(branch / 60);
-      branch >= 60 ? (branch %= 60) : branch;
-      if (value < 60) {
-        seconds = ("0" + value).slice(-2);
-        return "00:" + seconds;
-      }
-      let result = "";
-      if (hour > 0) {
-        result += hour + ":";
-      }
-      if (branch > 0) {
-        branch = ("0" + branch).slice(-2);
-        seconds = ("0" + seconds).slice(-2);
-        result += branch + ":" + seconds;
-      }
-      return result;
-    }
-  },
   data() {
     return {
       progress: 0,
@@ -112,6 +83,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  color: #333;
+}
 .l-con {
   display: flex;
   justify-content: space-between;

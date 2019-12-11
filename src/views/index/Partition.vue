@@ -64,11 +64,11 @@
           :key="item.aid"
         >
           <span :class="'number ' + (index < 3 ? 'top-three' : '')">
-            {{ index }}
+            {{ index + 1 }}
           </span>
           <a
             target="_blank"
-            href="#"
+            :href="'/player/av' + item.aid"
             class="title fontHover"
             v-if="index && !isTimeLine"
           >
@@ -76,7 +76,12 @@
               {{ item.title }}
             </p>
           </a>
-          <a target="_blank" href="#" class="title fontHover" v-if="isTimeLine">
+          <a
+            target="_blank"
+            :href="'/player/av' + item.aid"
+            class="title fontHover"
+            v-if="isTimeLine"
+          >
             <p :title="item.title" class="txt">
               <span class="txt-title">
                 {{ item.title }}
@@ -88,17 +93,20 @@
           </a>
           <div class="preview" v-if="!index && !isTimeLine">
             <div class="pic">
-              <a target="_blank" href="#">
+              <a target="_blank" :href="'/player/av' + item.aid">
                 <img :src="item.pic" />
               </a>
             </div>
             <div class="txt">
               <p :title="item.title">
-                <a target="_blank" href="#" class="fontHover">{{
-                  item.title
-                }}</a>
+                <a
+                  target="_blank"
+                  :href="'/player/av' + item.aid"
+                  class="fontHover"
+                  >{{ item.title }}</a
+                >
               </p>
-              <span>综合得分：194.6万</span>
+              <span>综合得分：{{ item.play | number }}</span>
             </div>
           </div>
         </div>
@@ -182,6 +190,13 @@ export default {
           return "星期六";
         case 6:
           return "星期天";
+      }
+    },
+    number: value => {
+      if (value < 10000) {
+        return value;
+      } else {
+        return (value / 10000).toFixed(1) + "万";
       }
     }
   },
