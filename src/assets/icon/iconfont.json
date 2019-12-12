@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "538489",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
       "icon_id": "690196",
       "name": "动态",
       "font_class": "iconfontdongtai",
@@ -41,6 +48,13 @@
       "unicode_decimal": 58890
     },
     {
+      "icon_id": "1929167",
+      "name": "转发",
+      "font_class": "zhuanfa",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
       "icon_id": "2041685",
       "name": "CN_bilibili B",
       "font_class": "CN_bilibiliB",
@@ -74,6 +88,13 @@
       "font_class": "UPzhu",
       "unicode": "e665",
       "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "2154256",
+      "name": "B币_32",
+      "font_class": "Bbi",
+      "unicode": "e667",
+      "unicode_decimal": 58983
     },
     {
       "icon_id": "2306764",
@@ -116,6 +137,27 @@
       "font_class": "zhuti",
       "unicode": "e6c2",
       "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "2406378",
+      "name": "32_ic_踩",
+      "font_class": "cai",
+      "unicode": "e6c5",
+      "unicode_decimal": 59077
+    },
+    {
+      "icon_id": "2406379",
+      "name": "32_ic_赞",
+      "font_class": "zan1",
+      "unicode": "e6c6",
+      "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "2446081",
+      "name": "我的收藏",
+      "font_class": "wodeshoucang",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
     },
     {
       "icon_id": "2508788",
@@ -263,6 +305,13 @@
       "font_class": "1",
       "unicode": "e613",
       "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "11344407",
+      "name": "私信",
+      "font_class": "sixin1",
+      "unicode": "e628",
+      "unicode_decimal": 58920
     },
     {
       "icon_id": "11806640",

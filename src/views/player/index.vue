@@ -7,11 +7,13 @@
           <a href="#" class="type" v-text="videoInfo.toptype"></a>
           >&nbsp;
           <a href="#" class="type" v-text="videoInfo.tname"></a>
-          <span>{{ videoInfo.pubdate | timeStamp }}</span>
+          <span>{{
+            (videoInfo.pubdate ? videoInfo.pubdate : "-") | timeStamp
+          }}</span>
         </p>
         <p class="video-data">
-          <span>{{ stat.view | number }}</span> ·<span
-            >{{ stat.danmaku | number }} 弹幕</span
+          <span>{{ (stat.view ? stat.view : "-") | number }}</span> ·<span
+            >{{ (stat.danmaku ? stat.danmaku : "-") | number }} 弹幕</span
           >
           <span>未经作者授权，禁止转载</span>
         </p>
@@ -22,7 +24,7 @@
             <div class="video-title" v-text="videoInfo.originTitle"></div>
             <div class="follow">
               <div>
-                <img :src="videoInfo.owner.face" />
+                <img :src="owner.face" />
               </div>
               <span>+关注</span>
             </div>
@@ -41,31 +43,62 @@
           <div class="player-control">控制器</div>
         </div>
       </div>
+      <toolbar></toolbar>
+      <reply></reply>
     </div>
-    <div class="r-con">
-      right
-    </div>
+    <recommend-right
+      :recommend="recommend"
+      :videoInfo="videoInfo"
+      :owner="owner"
+      @handleVideoCheck="handleVideoCheck"
+    ></recommend-right>
   </div>
 </template>
 
 <script>
 import { video } from "@/api";
+import { Reply } from "@/components";
+import RecommendRight from "./RecomendRight";
+import Toolbar from "./Toolbar";
 import moment from "moment";
 export default {
   name: "player",
+  components: {
+    RecommendRight,
+    Toolbar,
+    Reply
+  },
   data() {
     return {
+      aId: this.$route.params.aId,
       videoData: {},
       videoInfo: {},
-      stat: {}
+      videoTag: {},
+      stat: {},
+      owner: {},
+      recommend: []
     };
   },
-  created() {
+  beforeMount() {
     this.getVideoInfo();
+    this.getRecommend();
+    window.addEventListener("popstate", () => {
+      let av = window.location.href.split("av")[1];
+      if (av && av !== this.aId) {
+        this.aId = av;
+        this.getVideoInfo();
+        this.getRecommend();
+      }
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("popstate");
   },
   filters: {
     timeStamp: value => {
-      return moment(value, "X").format("YYYY-MM-DD hh:mm:ss");
+      if (value !== "-") {
+        return moment(value, "X").format("YYYY-MM-DD hh:mm:ss");
+      }
     }
   },
   methods: {
@@ -78,13 +111,28 @@ export default {
       }
     },
     getVideoInfo() {
-      video.getVideoInfo(this.$route.params.aId).then(res => {
+      video.getVideoInfo(this.aId).then(res => {
         console.log(res);
         this.videoData = res.data;
         this.videoInfo = res.data.videoInfo;
         this.stat = res.data.videoInfo.stat;
-        console.log(this.videoInfo.stat.view);
+        this.videoTag = res.data.videoTag;
+        this.owner = res.data.videoInfo.owner;
       });
+    },
+    getRecommend() {
+      video.getRecommend(this.aId).then(res => {
+        this.recommend = res.data;
+        this.recommend.length = 20;
+      });
+    },
+    handleVideoCheck(aid) {
+      var state = { title: "", url: window.location.href };
+      history.pushState(state, "", "av" + aid);
+      history.pushState(state, "", "av" + aid);
+      this.aId = window.location.href.split("av")[1];
+      this.getVideoInfo();
+      this.getRecommend();
     }
   }
 };
@@ -96,26 +144,23 @@ p {
   color: #999;
 }
 .v-wrapper {
-  max-width: 1660px;
+  max-width: 1400px;
   min-width: 980px;
   margin: 20px auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: row;
   .l-con {
-    width: 1280px;
+    width: 1044px;
     h1 {
       font-size: 14px;
     }
     .video-data {
-      margin-bottom: 5px;
+      margin-bottom: 12px;
       a,
       span {
         margin-right: 5px;
       }
     }
-  }
-  .r-con {
-    width: 320px;
   }
 }
 .video-player {
@@ -163,12 +208,14 @@ p {
     }
     .player-video {
       padding: 48px 7px;
+      height: 578px;
+      width: 100%;
+      box-sizing: border-box;
       video {
+        height: 100%;
         width: 100%;
-        max-height: 100%;
       }
     }
-
     .player-control {
       position: absolute;
       bottom: 0;

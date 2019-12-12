@@ -6,6 +6,9 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 Vue.filter("number", value => {
+  if (typeof value !== "number") {
+    return value;
+  }
   if (value < 10000) {
     return value;
   } else {
