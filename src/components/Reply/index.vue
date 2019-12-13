@@ -1,46 +1,82 @@
 <template>
   <div class="card-box">
     <div class="user-face">
-      <img
-        src="//i2.hdslb.com/bfs/face/2148fbc6a5668b167f542f60fe2fd47f87e8a6f3.jpg@52w_52h.webp"
-      />
+      <img :src="replyItem.member.avatar + '@52w_52h.webp'" />
     </div>
     <div class="user">
       <div class="name">
-        <a href="#">
-          貳貮贰
+        <a
+          href="#"
+          :class="
+            'username ' +
+              (replyItem.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+          "
+        >
+          {{ replyItem.member.uname }}
+        </a>
+        <a class="level">
+          <svg class="svg-icon" aria-hidden="true">
+            <use
+              :xlink:href="
+                '#icon-ic_userlevel_' +
+                  replyItem.member.level_info.current_level
+              "
+            ></use>
+          </svg>
+        </a>
+        <a href="#" class="nameplate">
+          <img
+            :src="replyItem.member.nameplate.image_small"
+            :title="replyItem.member.nameplate.name"
+          />
         </a>
       </div>
-      <p class="text">期待你做一个视频，水晶上限是多少</p>
+      <p class="text">{{ replyItem.content.message }}</p>
       <div class="info">
         <span class="plad info-between">来自<a href="#">安卓客户端</a> </span>
         <span class="time info-between">2018-11-04 09:56</span>
-        <span class="like info-between"><i class="iconfont">&#xe6c6;</i>4</span>
-        <span class="hate info-between"><i class="iconfont">&#xe6c5;</i>1</span>
+        <span class="like info-between"
+          ><i class="iconfont">&#xe6c6;</i>{{ replyItem.like }}</span
+        >
+        <span class="hate info-between"><i class="iconfont">&#xe6c5;</i></span>
         <span class="reply info-between">回复</span>
       </div>
       <div class="reply-box">
-        <div class="reply-item">
+        <div
+          class="reply-item"
+          v-for="item in replyItem.replies"
+          :key="item.rpid"
+        >
           <div class="reply">
             <a herf="#" class="reply-pic">
-              <img
-                src="//i0.hdslb.com/bfs/face/92d69b6053f3f918342baff34213d4c489af4083.jpg@52w_52h.webp"
-              />
+              <img :src="item.member.avatar + '@52w_52h.webp'" />
             </a>
             <div class="user-text">
-              <a href="#" class="username">小卖部的深渊</a
-              ><span class="reply-text"
-                >不是灵魂觉醒的比如鬼凯赤翎也缺金币缺的不像话</span
+              <a
+                href="#"
+                :class="
+                  'username ' +
+                    (item.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+                "
+                >{{ item.member.uname }}</a
               >
+              <svg class="svg-icon level" aria-hidden="true">
+                <use
+                  :xlink:href="
+                    '#icon-ic_userlevel_' + item.member.level_info.current_level
+                  "
+                ></use>
+              </svg>
+              <span class="reply-text">{{ item.content.message }}</span>
             </div>
           </div>
           <div class="info">
             <span class="time info-between">2018-11-04 09:56</span>
             <span class="like info-between"
-              ><i class="iconfont">&#xe6c6;</i>4</span
+              ><i class="iconfont">&#xe6c6;</i>{{ item.like }}</span
             >
             <span class="hate info-between"
-              ><i class="iconfont">&#xe6c5;</i>1</span
+              ><i class="iconfont">&#xe6c5;</i></span
             >
             <span class="reply info-between">回复</span>
           </div>
@@ -49,12 +85,35 @@
     </div>
   </div>
 </template>
-
 <script>
-export default {};
+import "./iconfont";
+export default {
+  name: "reply",
+  props: {
+    replyItem: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    level(value) {
+      return "icon-ic_userlevel_" + value;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+.level {
+  margin-right: 4px;
+}
+.svg-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 img {
   border-radius: 50%;
   width: 100%;
@@ -78,9 +137,16 @@ img {
   }
   .name {
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    .username {
+      color: #6d757a;
+      margin-right: 4px;
+    }
   }
   .text {
     margin: 5px 0;
+    font-size: 14px;
   }
 }
 .info {
@@ -121,8 +187,6 @@ img {
 .reply {
   display: flex;
   align-items: center;
-  line-height: 24px;
-  height: 24px;
   .username {
     margin-right: 4px;
     color: #6d757a;
@@ -131,11 +195,29 @@ img {
       color: #00a1d6;
     }
   }
+  .user-text {
+    display: inline-block;
+  }
   .reply-text {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     white-space: normal;
+    flex: 1;
   }
+}
+.nameplate {
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
+.vip-red-name {
+  color: #fb7299 !important;
+}
+
+.level {
+  margin-right: 4px;
+  vertical-align: middle;
 }
 </style>

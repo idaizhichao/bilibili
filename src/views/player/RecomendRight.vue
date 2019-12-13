@@ -187,6 +187,7 @@ p {
   }
   .info {
     margin-left: 10px;
+    color: #999;
     .info-title {
       color: #333;
       line-height: 18px;
@@ -199,7 +200,6 @@ p {
       -webkit-line-clamp: 2;
       overflow: hidden;
     }
-
     .up-name {
       margin: 6px 0;
     }

@@ -44,7 +44,7 @@
         </div>
       </div>
       <toolbar></toolbar>
-      <reply></reply>
+      <reply :replyItem="item" v-for="item in replies" :key="item.rpid"></reply>
     </div>
     <recommend-right
       :recommend="recommend"
@@ -76,7 +76,9 @@ export default {
       videoTag: {},
       stat: {},
       owner: {},
-      recommend: []
+      recommend: [],
+      replies: [],
+      index: 1
     };
   },
   beforeMount() {
@@ -118,6 +120,7 @@ export default {
         this.stat = res.data.videoInfo.stat;
         this.videoTag = res.data.videoTag;
         this.owner = res.data.videoInfo.owner;
+        this.getReply(this.videoInfo.aid, this.index);
       });
     },
     getRecommend() {
@@ -133,6 +136,12 @@ export default {
       this.aId = window.location.href.split("av")[1];
       this.getVideoInfo();
       this.getRecommend();
+    },
+    getReply(aid, index) {
+      video.getReply(aid, index).then(res => {
+        console.log(res);
+        this.replies = res.data.replies;
+      });
     }
   }
 };
