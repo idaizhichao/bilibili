@@ -20,7 +20,7 @@ import "../../assets/icon/iconfont.css";
 import { AppDeviceEnquire, mixinDevice } from "@/utils/mixin";
 
 export default {
-  name: "formSearch",
+  name: "FormSearch",
   mixins: [AppDeviceEnquire, mixinDevice]
 };
 </script>

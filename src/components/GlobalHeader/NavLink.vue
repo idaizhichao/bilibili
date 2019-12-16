@@ -54,7 +54,7 @@ const navList = [
   }
 ];
 export default {
-  name: "navLink",
+  name: "NavLink",
   mixins: [AppDeviceEnquire, mixinDevice],
   data() {
     return {

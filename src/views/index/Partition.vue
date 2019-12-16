@@ -3,7 +3,9 @@
     <div class="extension-left">
       <header class="l-title">
         <div class="header-left">
-          <i class="iconfont" v-html="icon" :style="'color:' + iconColor"></i>
+          <svg class="svg-icon">
+            <use :xlink:href="icon"></use>
+          </svg>
           <span
             ><a href="#">{{ title }}</a></span
           >
@@ -280,11 +282,12 @@ export default {
   margin-bottom: 16px;
   .header-left {
     display: flex;
+    align-items: center;
   }
-  i {
-    font-size: 23px;
-    line-height: 36px;
-    color: rgb(255, 215, 120);
+  .svg-icon {
+    width: 23px;
+    height: 23px;
+    margin-right: 6px;
   }
   span {
     box-sizing: border-box;

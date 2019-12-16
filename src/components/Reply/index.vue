@@ -86,9 +86,9 @@
   </div>
 </template>
 <script>
-import "./iconfont";
+import "@/assets/js/svg-icon";
 export default {
-  name: "reply",
+  name: "Reply",
   props: {
     replyItem: {
       type: Object,

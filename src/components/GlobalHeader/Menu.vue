@@ -185,7 +185,7 @@ const link = [
   },
   {
     title: "直播",
-    icon: "&#xe614;",
+    icon: "&#xe6df;",
     toPath: "/",
     color: "#48CFE5"
   },

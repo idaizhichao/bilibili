@@ -24,7 +24,7 @@
 <script>
 import CarouselItem from "./CarouselItem";
 export default {
-  name: "carousel",
+  name: "Carousel",
   data() {
     return {};
   },

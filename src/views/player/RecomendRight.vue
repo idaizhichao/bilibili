@@ -71,7 +71,7 @@
 
 <script>
 export default {
-  name: "recommendRight",
+  name: "RecommendRight",
   props: {
     recommend: {
       type: Array,

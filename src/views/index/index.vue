@@ -3,7 +3,7 @@
     <Recommend></Recommend>
     <Partition
       :title="'推广'"
-      :icon="'&#xe600;'"
+      :icon="'#icon-youxi'"
       :change="false"
       :conHeight="192"
     >
@@ -20,44 +20,19 @@
         </div>
       </template>
     </Partition>
-    <Partition
-      :title="'游戏'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
-      :rId="4"
-    >
-    </Partition>
-    <Partition
-      :title="'舞蹈'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
-      :rId="129"
-    >
-    </Partition>
-    <Partition
-      :title="'动画'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
-      :rId="1"
-    >
-    </Partition>
+    <Partition :title="'游戏'" :icon="'#icon-youxi'" :rId="4"> </Partition>
+    <Partition :title="'舞蹈'" :icon="'#icon-guixu'" :rId="129"> </Partition>
+    <Partition :title="'动画'" :icon="'#icon-fanju'" :rId="1"> </Partition>
     <Partition
       :title="'音乐'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
+      :icon="'#icon-tubiaozhizuomobanyihuifu-'"
       :rId="3"
     >
     </Partition>
-    <Partition
-      :title="'娱乐'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
-      :rId="5"
-    >
-    </Partition>
+    <Partition :title="'娱乐'" :icon="'#icon-youxi'" :rId="5"> </Partition>
     <Partition
       :title="'番剧'"
-      :icon="'&#xe60b;'"
+      :icon="'#icon-fanju'"
       :conHeight="376"
       :rId="1"
       :isTimeLine="true"
@@ -69,12 +44,7 @@
         </div>
       </template>
     </Partition>
-    <Partition
-      :title="'番剧动态'"
-      :icon="'&#xe6de;'"
-      :iconColor="'#58D598'"
-      :rId="1"
-    >
+    <Partition :title="'番剧动态'" :icon="'#icon-fanjutuijian'" :rId="1">
     </Partition>
   </div>
 </template>

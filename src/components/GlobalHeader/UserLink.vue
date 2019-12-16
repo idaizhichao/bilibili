@@ -35,7 +35,7 @@
 import { AppDeviceEnquire, mixinDevice } from "@/utils/mixin";
 
 export default {
-  name: "userLink",
+  name: "UserLink",
   mixins: [AppDeviceEnquire, mixinDevice]
 };
 </script>

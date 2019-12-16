@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name: "commendCard",
+  name: "CommendCard",
   props: {
     data: Object,
     require

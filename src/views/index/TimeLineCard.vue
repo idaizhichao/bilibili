@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "timeLineCard",
+  name: "TimeLineCard",
   props: {
     types: {
       type: Number,

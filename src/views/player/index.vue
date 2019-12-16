@@ -62,7 +62,7 @@ import RecommendRight from "./RecomendRight";
 import Toolbar from "./Toolbar";
 import moment from "moment";
 export default {
-  name: "player",
+  name: "Player",
   components: {
     RecommendRight,
     Toolbar,
