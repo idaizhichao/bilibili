@@ -48,10 +48,13 @@
           :key="item.rpid"
         >
           <div class="reply">
-            <a herf="#" class="reply-pic">
-              <img :src="item.member.avatar + '@52w_52h.webp'" />
-            </a>
             <div class="user-text">
+              <a herf="#">
+                <img
+                  class="reply-pic"
+                  :src="item.member.avatar + '@52w_52h.webp'"
+                />
+              </a>
               <a
                 href="#"
                 :class="
@@ -182,7 +185,7 @@ img {
 .reply-pic {
   width: 24px;
   height: 24px;
-  margin-right: 4px;
+  margin-right: 7px;
 }
 .reply {
   display: flex;
@@ -191,6 +194,7 @@ img {
     margin-right: 4px;
     color: #6d757a;
     transition: all 0.3s;
+    vertical-align: super;
     &:hover {
       color: #00a1d6;
     }
@@ -199,6 +203,7 @@ img {
     display: inline-block;
   }
   .reply-text {
+    vertical-align: super;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -218,6 +223,6 @@ img {
 
 .level {
   margin-right: 4px;
-  vertical-align: middle;
+  vertical-align: sub;
 }
 </style>
