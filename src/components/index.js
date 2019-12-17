@@ -3,4 +3,5 @@ import CommendCard from "./CommendCard";
 import RankList from "./RankList";
 import Carousel from "./Carousel";
 import Reply from "./Reply";
-export { GlobalHeader, CommendCard, RankList, Carousel, Reply };
+import Pagination from "./Pagination";
+export { GlobalHeader, CommendCard, RankList, Carousel, Reply, Pagination };

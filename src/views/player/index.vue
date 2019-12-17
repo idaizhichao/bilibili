@@ -45,6 +45,10 @@
       </div>
       <toolbar></toolbar>
       <reply :replyItem="item" v-for="item in replies" :key="item.rpid"></reply>
+      <pagination
+        @change="handlePaginationChange"
+        :totle="page.count"
+      ></pagination>
     </div>
     <recommend-right
       :recommend="recommend"
@@ -57,7 +61,7 @@
 
 <script>
 import { video } from "@/api";
-import { Reply } from "@/components";
+import { Reply, Pagination } from "@/components";
 import RecommendRight from "./RecomendRight";
 import Toolbar from "./Toolbar";
 import moment from "moment";
@@ -66,7 +70,8 @@ export default {
   components: {
     RecommendRight,
     Toolbar,
-    Reply
+    Reply,
+    Pagination
   },
   data() {
     return {
@@ -78,7 +83,8 @@ export default {
       owner: {},
       recommend: [],
       replies: [],
-      index: 1
+      index: 1,
+      page: {}
     };
   },
   beforeMount() {
@@ -140,8 +146,12 @@ export default {
     getReply(aid, index) {
       video.getReply(aid, index).then(res => {
         console.log(res);
+        this.page = res.data.page;
         this.replies = res.data.replies;
       });
+    },
+    handlePaginationChange(index) {
+      this.getReply(this.videoInfo.aid, index);
     }
   }
 };
