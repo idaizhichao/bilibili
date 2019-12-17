@@ -52,7 +52,7 @@ export default {
     },
     lists() {
       if (this.current < 5) {
-        return [1, 2, 3, 4, 5, 6, 0, this.pageTotle];
+        return [1, 2, 3, 4, 5, 6, undefined, this.pageTotle];
       }
       if (this.current >= 5 && this.current < this.pageTotle - 2) {
         return [
@@ -86,20 +86,17 @@ export default {
   },
   methods: {
     handleCurrent(item) {
-      console.log(item);
       if (item) {
         this.current = item;
         this.$emit("change", item);
       }
     },
     handleButtonClick() {
-      console.log(typeof this.skip);
       if (this.skip)
         this.current = isNaN(parseInt(this.skip)) ? 1 : parseInt(this.skip);
       else if (this.skip < 0 || this.skip > this.pageTotle)
         this.current = this.pageTotle;
       else this.current = 1;
-
       this.$emit("change", this.current);
       this.skip = "";
     }
