@@ -1,7 +1,10 @@
 <template>
   <div class="card-box">
     <div class="user-face">
-      <img :src="replyItem.member.avatar + '@52w_52h.webp'" />
+      <img
+        :src="replyItem.member.avatar + '@52w_52h.webp'"
+        :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+      />
     </div>
     <div class="user">
       <div class="name">
@@ -31,7 +34,7 @@
           />
         </a>
       </div>
-      <p class="text">{{ replyItem.content.message }}</p>
+      <p class="text" v-html="transilation(replyItem.content.message)"></p>
       <div class="info">
         <span class="plad info-between">来自<a href="#">安卓客户端</a> </span>
         <span class="time info-between">2018-11-04 09:56</span>
@@ -48,13 +51,14 @@
           :key="item.rpid"
         >
           <div class="reply">
+            <a herf="#">
+              <img
+                class="reply-pic"
+                :src="item.member.avatar + '@52w_52h.webp'"
+                :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+              />
+            </a>
             <div class="user-text">
-              <a herf="#">
-                <img
-                  class="reply-pic"
-                  :src="item.member.avatar + '@52w_52h.webp'"
-                />
-              </a>
               <a
                 href="#"
                 :class="
@@ -70,7 +74,10 @@
                   "
                 ></use>
               </svg>
-              <span class="reply-text">{{ item.content.message }}</span>
+              <span
+                class="reply-text"
+                v-html="transilation(item.content.message)"
+              ></span>
             </div>
           </div>
           <div class="info">
@@ -101,6 +108,11 @@ export default {
   methods: {
     level(value) {
       return "icon-ic_userlevel_" + value;
+    },
+    transilation(value) {
+      let exp = /['\n']/g;
+      let x = value.replace(exp, "<br/>");
+      return x;
     }
   }
 };
@@ -135,7 +147,7 @@ img {
   }
   .user {
     flex: 1;
-    margin-left: 10px;
+    margin-left: 20px;
     border-bottom: 1px solid #e5e9ef;
   }
   .name {
@@ -189,7 +201,6 @@ img {
 }
 .reply {
   display: flex;
-  align-items: center;
   .username {
     margin-right: 4px;
     color: #6d757a;
