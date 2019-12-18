@@ -50,12 +50,14 @@
         :totle="page.count"
       ></pagination>
     </div>
-    <recommend-right
-      :recommend="recommend"
-      :videoInfo="videoInfo"
-      :owner="owner"
-      @handleVideoCheck="handleVideoCheck"
-    ></recommend-right>
+    <div>
+      <recommend-right
+        :recommend="recommend"
+        :videoInfo="videoInfo"
+        :owner="owner"
+        @handleVideoCheck="handleVideoCheck"
+      ></recommend-right>
+    </div>
   </div>
 </template>
 
@@ -84,7 +86,8 @@ export default {
       recommend: [],
       replies: [],
       index: 1,
-      page: {}
+      page: {},
+      isOpen: false
     };
   },
   beforeMount() {
@@ -132,7 +135,6 @@ export default {
     getRecommend() {
       video.getRecommend(this.aId).then(res => {
         this.recommend = res.data;
-        this.recommend.length = 20;
       });
     },
     handleVideoCheck(aid) {
@@ -240,5 +242,15 @@ p {
       bottom: 0;
     }
   }
+}
+.rec-footer {
+  margin-top: 10px;
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+  background-color: #f4f5f7;
+  color: #999;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

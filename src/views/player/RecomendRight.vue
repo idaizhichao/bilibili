@@ -34,7 +34,7 @@
       <div class="rec-title">
         相关推荐
       </div>
-      <div class="card-box" v-for="item in recommend" :key="item.aid">
+      <div class="card-box" v-for="item in recommendCopy" :key="item.aid">
         <div class="pic">
           <a
             :href="'/player/av' + item.aid"
@@ -62,9 +62,11 @@
           </div>
         </div>
       </div>
-      <div class="rec-footer">
-        展开
-      </div>
+      <div
+        class="rec-footer"
+        @click="handleOpenClick"
+        v-text="isOpen ? '收缩' : '展开'"
+      ></div>
     </div>
   </div>
 </template>
@@ -86,10 +88,27 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  computed: {
+    recommendCopy() {
+      if (this.isOpen) {
+        return [...this.recommend];
+      } else {
+        return [...this.recommend].splice(0, 19);
+      }
+    }
+  },
   methods: {
     handleVideoCheck(aid) {
       console.log(aid);
       this.$emit("handleVideoCheck", aid);
+    },
+    handleOpenClick() {
+      this.isOpen = !this.isOpen;
     }
   }
 };
