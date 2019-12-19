@@ -4,4 +4,13 @@ import RankList from "./RankList";
 import Carousel from "./Carousel";
 import Reply from "./Reply";
 import Pagination from "./Pagination";
-export { GlobalHeader, CommendCard, RankList, Carousel, Reply, Pagination };
+import UserCard from "./UserCard";
+export {
+  GlobalHeader,
+  CommendCard,
+  RankList,
+  Carousel,
+  Reply,
+  Pagination,
+  UserCard
+};

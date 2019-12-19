@@ -1,6 +1,10 @@
 <template>
   <div class="card-box">
-    <div class="user-face">
+    <div
+      class="user-face"
+      @mouseenter="handleMouseenter(replyItem.member.mid, $event)"
+      @mouseleave="handleMouseleave"
+    >
       <img
         :src="replyItem.member.avatar + '@52w_52h.webp'"
         :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
@@ -53,6 +57,8 @@
           <div class="reply">
             <a herf="#">
               <img
+                @mouseenter="handleMouseenter(item.member.mid, $event)"
+                @mouseleave="handleMouseleave"
                 class="reply-pic"
                 :src="item.member.avatar + '@52w_52h.webp'"
                 :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
@@ -97,6 +103,7 @@
 </template>
 <script>
 import "@/assets/js/svg-icon";
+
 export default {
   name: "Reply",
   props: {
@@ -104,6 +111,13 @@ export default {
       type: Object,
       default: () => {}
     }
+  },
+  data() {
+    return {
+      top: 0,
+      left: 0,
+      isUserCard: false
+    };
   },
   methods: {
     level(value) {
@@ -113,6 +127,16 @@ export default {
       let exp = /['\n']/g;
       let x = value.replace(exp, "<br/>");
       return x;
+    },
+    handleMouseenter(mid, e) {
+      console.log(mid);
+      console.log([...arguments]);
+      this.top = e.pageY - e.offsetY + e.target.offsetHeight;
+      this.left = e.pageX - e.offsetX;
+      this.$emit("userCard", this.top, this.left, true, mid);
+    },
+    handleMouseleave() {
+      this.$emit("userCard", this.top, this.left, false);
     }
   }
 };
@@ -139,6 +163,8 @@ img {
   box-sizing: border-box;
   display: flex;
   .user-face {
+    cursor: pointer;
+    height: 48px;
     img {
       width: 48px;
       height: 48px;

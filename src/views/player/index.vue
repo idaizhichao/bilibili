@@ -13,7 +13,13 @@
         :videoTag="videoData.videoTag"
         :videoDes="videoInfo.desc"
       ></toolbar>
-      <reply :replyItem="item" v-for="item in replies" :key="item.rpid"></reply>
+
+      <reply
+        :replyItem="item"
+        v-for="item in replies"
+        :key="item.rpid"
+        @userCard="userCard"
+      ></reply>
       <pagination @change="handlePaginationChange" :totle="page.count">
       </pagination>
     </div>
@@ -26,12 +32,20 @@
         @handleVideoCheck="handleVideoCheck"
       ></recommend-right>
     </div>
+    <user-card
+      :top="top"
+      :left="left"
+      v-if="isUserCard"
+      @userCard="handleUserCard"
+      :member="member"
+    ></user-card>
   </div>
 </template>
 
 <script>
-import { video } from "@/api";
-import { Reply, Pagination } from "@/components";
+import { video, up } from "@/api";
+
+import { Reply, Pagination, UserCard } from "@/components";
 import RecommendRight from "./RecomendRight";
 import Toolbar from "./Toolbar";
 import PlayerLeft from "./PlayerLeft";
@@ -43,7 +57,8 @@ export default {
     Toolbar,
     Reply,
     Pagination,
-    PlayerLeft
+    PlayerLeft,
+    UserCard
   },
   data() {
     return {
@@ -57,7 +72,12 @@ export default {
       replies: [],
       index: 1,
       page: {},
-      isOpen: false
+      isOpen: false,
+      top: 0,
+      left: 0,
+      isUserCard: false,
+      member: {},
+      mid: undefined
     };
   },
   beforeMount() {
@@ -83,6 +103,19 @@ export default {
     }
   },
   methods: {
+    userCard(top, left, type, mid) {
+      console.log(top, left);
+      this.top = top;
+      this.left = left;
+      this.isUserCard = type;
+      if (mid && this.mid !== mid) {
+        this.mid = mid;
+        this.getCardInfo(this.mid);
+      }
+    },
+    handleUserCard(type) {
+      this.isUserCard = type;
+    },
     handleVideoClick() {
       console.log(this.$refs.video.paused);
       if (this.$refs.video.paused) {
@@ -124,6 +157,11 @@ export default {
     },
     handlePaginationChange(index) {
       this.getReply(this.videoInfo.aid, index);
+    },
+    getCardInfo(mid) {
+      up.getCardInfo(mid).then(res => {
+        this.member = res.data;
+      });
     }
   }
 };
