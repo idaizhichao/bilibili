@@ -1,60 +1,28 @@
 <template>
   <div class="v-wrapper">
     <div class="l-con">
-      <div class="video-info">
-        <h1 class="video-data" v-text="videoInfo.originTitle"></h1>
-        <p class="video-data">
-          <a href="#" class="type" v-text="videoInfo.toptype"></a>
-          >&nbsp;
-          <a href="#" class="type" v-text="videoInfo.tname"></a>
-          <span>{{
-            (videoInfo.pubdate ? videoInfo.pubdate : "-") | timeStamp
-          }}</span>
-        </p>
-        <p class="video-data">
-          <span>{{ (stat.view ? stat.view : "-") | number }}</span> ·<span
-            >{{ (stat.danmaku ? stat.danmaku : "-") | number }} 弹幕</span
-          >
-          <span>未经作者授权，禁止转载</span>
-        </p>
-      </div>
-      <div class="video-player">
-        <div class="play-video-wrap">
-          <div class="player-video-top">
-            <div class="video-title" v-text="videoInfo.originTitle"></div>
-            <div class="follow">
-              <div>
-                <img :src="owner.face" />
-              </div>
-              <span>+关注</span>
-            </div>
-            <div class="feedback">
-              反馈
-            </div>
-          </div>
-          <div class="player-video">
-            <video
-              ref="video"
-              @click="handleVideoClick"
-              :src="videoInfo.initUrl"
-              :poster="videoInfo.pic"
-            />
-          </div>
-          <div class="player-control">控制器</div>
-        </div>
-      </div>
-      <toolbar></toolbar>
+      <player-left
+        @getVideoInfo="getVideoInfo"
+        @getRecommend="getRecommend"
+        :videoInfo="videoInfo"
+        :owner="owner"
+        :stat="videoInfo.stat"
+      ></player-left>
+      <toolbar
+        :stat="videoInfo.stat"
+        :videoTag="videoData.videoTag"
+        :videoDes="videoInfo.desc"
+      ></toolbar>
       <reply :replyItem="item" v-for="item in replies" :key="item.rpid"></reply>
-      <pagination
-        @change="handlePaginationChange"
-        :totle="page.count"
-      ></pagination>
+      <pagination @change="handlePaginationChange" :totle="page.count">
+      </pagination>
     </div>
     <div>
       <recommend-right
         :recommend="recommend"
         :videoInfo="videoInfo"
         :owner="owner"
+        :userState="videoData.userState"
         @handleVideoCheck="handleVideoCheck"
       ></recommend-right>
     </div>
@@ -66,6 +34,7 @@ import { video } from "@/api";
 import { Reply, Pagination } from "@/components";
 import RecommendRight from "./RecomendRight";
 import Toolbar from "./Toolbar";
+import PlayerLeft from "./PlayerLeft";
 import moment from "moment";
 export default {
   name: "Player",
@@ -73,7 +42,8 @@ export default {
     RecommendRight,
     Toolbar,
     Reply,
-    Pagination
+    Pagination,
+    PlayerLeft
   },
   data() {
     return {
@@ -172,85 +142,6 @@ p {
   justify-content: row;
   .l-con {
     width: 1044px;
-    h1 {
-      font-size: 14px;
-    }
-    .video-data {
-      margin-bottom: 12px;
-      a,
-      span {
-        margin-right: 5px;
-      }
-    }
   }
-}
-.video-player {
-  .play-video-wrap {
-    &:hover {
-      .player-video-top {
-        opacity: 1;
-      }
-    }
-    position: relative;
-    background-color: #000;
-    color: #fff;
-    .player-video-top {
-      opacity: 0;
-      transition: opacity 0.5s;
-      top: 10px;
-      display: flex;
-      width: 100%;
-      position: absolute;
-      justify-content: space-between;
-      align-items: center;
-      img {
-        width: 25px;
-        height: 25px;
-        padding: 0 10px;
-        border-radius: 50%;
-        z-index: 2;
-      }
-      .follow {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        span {
-          margin-left: 4px;
-        }
-      }
-      .feedback {
-        margin: 0 20px;
-        cursor: pointer;
-      }
-      .video-title {
-        flex: 1;
-        cursor: default;
-      }
-    }
-    .player-video {
-      padding: 48px 7px;
-      height: 578px;
-      width: 100%;
-      box-sizing: border-box;
-      video {
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .player-control {
-      position: absolute;
-      bottom: 0;
-    }
-  }
-}
-.rec-footer {
-  margin-top: 10px;
-  width: 100%;
-  height: 42px;
-  line-height: 42px;
-  background-color: #f4f5f7;
-  color: #999;
-  text-align: center;
-  cursor: pointer;
 }
 </style>

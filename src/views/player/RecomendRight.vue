@@ -20,11 +20,10 @@
             <span>充电</span>
           </div>
           <div class="btn-default follow-btn">
-            <span
-              ><i class="iconfont">&#xe641;</i> 关注<span class="follow-num"
-                >835</span
-              ></span
-            >
+            <span>
+              <i class="iconfont">&#xe641;</i> 关注
+              <span class="follow-num">{{ userState.follower | number }}</span>
+            </span>
           </div>
         </div>
       </div>
@@ -81,11 +80,23 @@ export default {
     },
     videoInfo: {
       type: Object,
-      default: () => {}
+      default: () => {
+        return {
+          desc: "-"
+        };
+      }
     },
     owner: {
       type: Object,
       default: () => {}
+    },
+    userState: {
+      type: Object,
+      default: () => {
+        return {
+          follower: 0
+        };
+      }
     }
   },
   data() {
