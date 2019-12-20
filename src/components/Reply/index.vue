@@ -1,100 +1,113 @@
 <template>
-  <div class="card-box">
-    <div
-      class="user-face"
-      @mouseenter="handleMouseenter(replyItem.member.mid, $event)"
-      @mouseleave="handleMouseleave"
+  <div>
+    <user-card
+      :top="top"
+      :left="left"
+      v-if="isUserCard"
+      @userCard="handleUserCard"
+      :member="member"
     >
-      <img
-        :src="replyItem.member.avatar + '@52w_52h.webp'"
-        :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
-      />
-    </div>
-    <div class="user">
-      <div class="name">
-        <a
-          href="#"
-          :class="
-            'username ' +
-              (replyItem.member.vip.vipType !== 0 ? 'vip-red-name' : '')
-          "
-        >
-          {{ replyItem.member.uname }}
-        </a>
-        <a class="level">
-          <svg class="svg-icon" aria-hidden="true">
-            <use
-              :xlink:href="
-                '#icon-ic_userlevel_' +
-                  replyItem.member.level_info.current_level
-              "
-            ></use>
-          </svg>
-        </a>
-        <a href="#" class="nameplate">
-          <img
-            :src="replyItem.member.nameplate.image_small"
-            :title="replyItem.member.nameplate.name"
-          />
-        </a>
+    </user-card>
+    <div class="card-box" v-for="replyItem in replies" :key="replyItem.rpid">
+      <div
+        class="user-face"
+        @mouseenter="handleMouseenter(replyItem.member.mid, $event)"
+        @mouseleave="handleMouseleave"
+      >
+        <img
+          :src="replyItem.member.avatar + '@52w_52h.webp'"
+          :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+        />
       </div>
-      <p class="text" v-html="transilation(replyItem.content.message)"></p>
-      <div class="info">
-        <span class="plad info-between">来自<a href="#">安卓客户端</a> </span>
-        <span class="time info-between">2018-11-04 09:56</span>
-        <span class="like info-between"
-          ><i class="iconfont">&#xe6c6;</i>{{ replyItem.like }}</span
-        >
-        <span class="hate info-between"><i class="iconfont">&#xe6c5;</i></span>
-        <span class="reply info-between">回复</span>
-      </div>
-      <div class="reply-box">
-        <div
-          class="reply-item"
-          v-for="item in replyItem.replies"
-          :key="item.rpid"
-        >
-          <div class="reply">
-            <a herf="#">
-              <img
-                @mouseenter="handleMouseenter(item.member.mid, $event)"
-                @mouseleave="handleMouseleave"
-                class="reply-pic"
-                :src="item.member.avatar + '@52w_52h.webp'"
-                :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
-              />
-            </a>
-            <div class="user-text">
-              <a
-                href="#"
-                :class="
-                  'username ' +
-                    (item.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+      <div class="user">
+        <div class="name">
+          <a
+            href="#"
+            :class="
+              'username ' +
+                (replyItem.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+            "
+          >
+            {{ replyItem.member.uname }}
+          </a>
+          <a class="level">
+            <svg class="svg-icon" aria-hidden="true">
+              <use
+                :xlink:href="
+                  '#icon-ic_userlevel_' +
+                    replyItem.member.level_info.current_level
                 "
-                >{{ item.member.uname }}</a
-              >
-              <svg class="svg-icon level" aria-hidden="true">
-                <use
-                  :xlink:href="
-                    '#icon-ic_userlevel_' + item.member.level_info.current_level
+              ></use>
+            </svg>
+          </a>
+          <a href="#" class="nameplate">
+            <img
+              :src="replyItem.member.nameplate.image_small"
+              :title="replyItem.member.nameplate.name"
+            />
+          </a>
+        </div>
+        <p class="text" v-html="transilation(replyItem.content.message)"></p>
+        <div class="info">
+          <span class="plad info-between">来自<a href="#">安卓客户端</a> </span>
+          <span class="time info-between">2018-11-04 09:56</span>
+          <span class="like info-between"
+            ><i class="iconfont">&#xe6c6;</i>{{ replyItem.like }}</span
+          >
+          <span class="hate info-between"
+            ><i class="iconfont">&#xe6c5;</i></span
+          >
+          <span class="reply info-between">回复</span>
+        </div>
+        <div class="reply-box">
+          <div
+            class="reply-item"
+            v-for="item in replyItem.replies"
+            :key="item.rpid"
+          >
+            <div class="reply">
+              <a herf="#">
+                <img
+                  @mouseenter="handleMouseenter(item.member.mid, $event)"
+                  @mouseleave="handleMouseleave"
+                  class="reply-pic"
+                  :src="item.member.avatar + '@52w_52h.webp'"
+                  :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+                />
+              </a>
+              <div class="user-text">
+                <a
+                  href="#"
+                  :class="
+                    'username ' +
+                      (item.member.vip.vipType !== 0 ? 'vip-red-name' : '')
                   "
-                ></use>
-              </svg>
-              <span
-                class="reply-text"
-                v-html="transilation(item.content.message)"
-              ></span>
+                  >{{ item.member.uname }}</a
+                >
+                <svg class="svg-icon level" aria-hidden="true">
+                  <use
+                    :xlink:href="
+                      '#icon-ic_userlevel_' +
+                        item.member.level_info.current_level
+                    "
+                  ></use>
+                </svg>
+                <span
+                  class="reply-text"
+                  v-html="transilation(item.content.message)"
+                ></span>
+              </div>
             </div>
-          </div>
-          <div class="info">
-            <span class="time info-between">2018-11-04 09:56</span>
-            <span class="like info-between"
-              ><i class="iconfont">&#xe6c6;</i>{{ item.like }}</span
-            >
-            <span class="hate info-between"
-              ><i class="iconfont">&#xe6c5;</i></span
-            >
-            <span class="reply info-between">回复</span>
+            <div class="info">
+              <span class="time info-between">2018-11-04 09:56</span>
+              <span class="like info-between"
+                ><i class="iconfont">&#xe6c6;</i>{{ item.like }}</span
+              >
+              <span class="hate info-between"
+                ><i class="iconfont">&#xe6c5;</i></span
+              >
+              <span class="reply info-between">回复</span>
+            </div>
           </div>
         </div>
       </div>
@@ -103,20 +116,27 @@
 </template>
 <script>
 import "@/assets/js/svg-icon";
+import { up } from "@/api";
 
+import UserCard from "@/components/UserCard";
 export default {
   name: "Reply",
+  components: {
+    UserCard
+  },
   props: {
-    replyItem: {
-      type: Object,
-      default: () => {}
+    replies: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
     return {
       top: 0,
       left: 0,
-      isUserCard: false
+      isUserCard: false,
+      member: {},
+      mid: undefined
     };
   },
   methods: {
@@ -130,13 +150,26 @@ export default {
     },
     handleMouseenter(mid, e) {
       console.log(mid);
-      console.log([...arguments]);
+      this.isUserCard = true;
       this.top = e.pageY - e.offsetY + e.target.offsetHeight;
       this.left = e.pageX - e.offsetX;
-      this.$emit("userCard", this.top, this.left, true, mid);
+      console.log(this);
+      if (this.mid !== mid) {
+        this.mid = mid;
+        this.getCardInfo(mid);
+      }
     },
     handleMouseleave() {
-      this.$emit("userCard", this.top, this.left, false);
+      this.isUserCard = false;
+    },
+    getCardInfo(mid) {
+      up.getCardInfo(mid).then(res => {
+        this.member = res.data;
+        console.log(res.data);
+      });
+    },
+    handleUserCard(type) {
+      this.isUserCard = type;
     }
   }
 };

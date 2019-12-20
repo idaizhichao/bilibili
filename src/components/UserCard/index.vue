@@ -48,7 +48,7 @@
     </div>
     <div class="btn-class">
       <span class="following default-btn">关注</span>
-      <span class="message default-btn">发消息</span>
+      <span class="message default-btn">发送消息</span>
     </div>
   </div>
 </template>

@@ -24,9 +24,7 @@
       </div>
     </div>
     <div class="desc">
-      <div class="info">
-        {{ videoDes | transilation }}
-      </div>
+      <div class="info" v-html="transilation(videoDes)"></div>
       <!-- <div class="desc-btn">
         <span>收起</span>
       </div> -->
@@ -63,7 +61,7 @@ export default {
       default: ""
     }
   },
-  filters: {
+  methods: {
     transilation(value) {
       let exp = /['\n']/g;
       let x = value.replace(exp, "<br/>");

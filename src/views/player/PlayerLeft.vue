@@ -68,13 +68,6 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      top: 0,
-      left: 0,
-      isUserCard: false
-    };
-  },
   filters: {
     timeStamp: value => {
       if (value !== "-") {
