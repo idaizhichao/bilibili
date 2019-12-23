@@ -96,12 +96,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
+  transition: show 0.2s;
   padding: 15px 20px;
   width: 375px;
   box-sizing: border-box;
   position: absolute;
   z-index: 1000;
   background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
 }
 .face {
   position: absolute;
@@ -117,6 +120,7 @@ export default {
   height: 120px;
   background-size: 100%;
   position: absolute;
+  border-radius: 4px;
 }
 .info {
   padding: 105px 0px 19px 65px;

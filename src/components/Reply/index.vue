@@ -14,10 +14,12 @@
         @mouseenter="handleMouseenter(replyItem.member.mid, $event)"
         @mouseleave="handleMouseleave"
       >
-        <img
-          :src="replyItem.member.avatar + '@52w_52h.webp'"
-          :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
-        />
+        <a href="#">
+          <img
+            :src="replyItem.member.avatar + '@52w_52h.webp'"
+            :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+          />
+        </a>
       </div>
       <div class="user">
         <div class="name">
@@ -50,7 +52,9 @@
         <p class="text" v-html="transilation(replyItem.content.message)"></p>
         <div class="info">
           <span class="plad info-between">来自<a href="#">安卓客户端</a> </span>
-          <span class="time info-between">2018-11-04 09:56</span>
+          <span class="time info-between">{{
+            replyItem.ctime | timeStamp
+          }}</span>
           <span class="like info-between"
             ><i class="iconfont">&#xe6c6;</i>{{ replyItem.like }}</span
           >
@@ -99,7 +103,9 @@
               </div>
             </div>
             <div class="info">
-              <span class="time info-between">2018-11-04 09:56</span>
+              <span class="time info-between">
+                {{ item.ctime | timeStamp }}
+              </span>
               <span class="like info-between"
                 ><i class="iconfont">&#xe6c6;</i>{{ item.like }}</span
               >
@@ -117,6 +123,7 @@
 <script>
 import "@/assets/js/svg-icon";
 import { up } from "@/api";
+import moment from "moment";
 
 import UserCard from "@/components/UserCard";
 export default {
@@ -138,6 +145,13 @@ export default {
       member: {},
       mid: undefined
     };
+  },
+  filters: {
+    timeStamp: value => {
+      if (value !== "-") {
+        return moment(value, "X").format("YYYY-MM-DD hh:mm:ss");
+      }
+    }
   },
   methods: {
     level(value) {
