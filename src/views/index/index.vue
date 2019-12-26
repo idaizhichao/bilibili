@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Recommend></Recommend>
+    <Recommend />
     <Partition
       :title="'推广'"
       :icon="'#icon-youxi'"
@@ -61,8 +61,7 @@ export default {
   data() {
     return {
       lists: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-      gameRankList: [],
-      kejiList: []
+      gameRankList: []
     };
   }
 };

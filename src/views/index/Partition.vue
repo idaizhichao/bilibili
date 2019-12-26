@@ -4,7 +4,7 @@
       <header class="l-title">
         <div class="header-left">
           <svg class="svg-icon">
-            <use :xlink:href="icon"></use>
+            <use :xlink:href="icon" />
           </svg>
           <span
             ><a href="#">{{ title }}</a></span
@@ -40,17 +40,13 @@
           class="l-con"
           :style="'height:' + conHeight + 'px'"
         >
-          <commend-card
+          <Commend-Card
             v-for="item in dynamic.archives"
             :key="item.aid"
             :data="item"
-          ></commend-card>
+          />
         </div>
-        <time-line-card
-          :types="1"
-          :lists="lists.episodes"
-          v-if="isTimeLine"
-        ></time-line-card>
+        <TimeLineCard :types="1" :lists="lists.episodes" v-if="isTimeLine" />
       </div>
     </div>
 
@@ -96,7 +92,7 @@
           <div class="preview" v-if="!index && !isTimeLine">
             <div class="pic">
               <a target="_blank" :href="'/player/av' + item.aid">
-                <img :src="item.pic" />
+                <img :src="item.pic + '@112w_63h_1c_100q.webp'" />
               </a>
             </div>
             <div class="txt">
@@ -105,8 +101,8 @@
                   target="_blank"
                   :href="'/player/av' + item.aid"
                   class="fontHover"
-                  >{{ item.title }}</a
-                >
+                  >{{ item.title }}
+                </a>
               </p>
               <span>综合得分：{{ item.play | number }}</span>
             </div>
