@@ -251,24 +251,12 @@ export default {
     }
   },
   mounted() {
-    let _this = this;
-    let observer = new IntersectionObserver(onIntersection);
-    let lazy = this.$refs.lazy;
-    observer.observe(lazy);
-    function onIntersection(entries) {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-          observer.unobserve(entry.target);
-          console.log(entry.target);
-          if (_this.isTimeLine) {
-            _this.getRankSeason(_this.rId, _this.day);
-            _this.getTimeLine(_this.rId);
-          } else {
-            _this.getRegion(_this.rId, _this.day);
-            _this.getRegionDynamic(_this.rId, _this.ps);
-          }
-        }
-      });
+    if (this.isTimeLine) {
+      this.getRankSeason(this.rId, this.day);
+      this.getTimeLine(this.rId);
+    } else {
+      this.getRegion(this.rId, this.day);
+      this.getRegionDynamic(this.rId, this.ps);
     }
   }
 };

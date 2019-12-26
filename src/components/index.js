@@ -5,6 +5,7 @@ import Carousel from "./Carousel";
 import Reply from "./Reply";
 import Pagination from "./Pagination";
 import UserCard from "./UserCard";
+import LazyComponent from "./LazyComponent";
 export {
   GlobalHeader,
   CommendCard,
@@ -12,5 +13,6 @@ export {
   Carousel,
   Reply,
   Pagination,
-  UserCard
+  UserCard,
+  LazyComponent
 };
