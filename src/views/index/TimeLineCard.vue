@@ -3,7 +3,9 @@
     <div class="item" v-for="item in lists" :key="item.date">
       <div class="item-image">
         <a href="#" target="_blank" :title="item.title">
-          <img :src="item.square_cover + '@70w_70h_1c_100q.webp'" />
+          <img
+            :src="imageUseHttps(item.square_cover, '@70w_70h_1c_100q.webp')"
+          />
         </a>
       </div>
       <div class="item-txt">
@@ -34,6 +36,11 @@ export default {
       default: () => {
         return [];
       }
+    }
+  },
+  methods: {
+    imageUseHttps(src, webp = "") {
+      return src.replace("http://", "https://") + webp;
     }
   }
 };
