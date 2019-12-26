@@ -58,7 +58,7 @@ export default {
       ) {
         console.log(el.target.className);
         el.target.style.backgroundImage =
-          'url("http://i0.hdslb.com/bfs/videoshot/' + cid + '.jpg@.webp")';
+          'url("https://i0.hdslb.com/bfs/videoshot/' + cid + '.jpg@.webp")';
       }
       const value = el.offsetX / el.toElement.scrollWidth;
       const progress = parseFloat(value).toFixed(2) * 100;
