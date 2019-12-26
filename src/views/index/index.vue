@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="index">
     <Recommend />
     <Partition
       :title="'推广'"
@@ -63,7 +63,8 @@ export default {
       lists: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
       gameRankList: []
     };
-  }
+  },
+  mounted() {}
 };
 </script>
 
