@@ -1,7 +1,7 @@
 <template>
   <div class="l-con-box">
     <div class="con-image">
-      <a :href="'/player/av' + data.aid" class="fenmian" target="_blank">
+      <a :href="`/player/av${data.aid}`" class="fenmian" target="_blank">
         <img :src="imageUseHttps(data.pic, '@206w_116h_1c_100q.webp')" />
         <div class="count">
           <div class="left">
@@ -21,11 +21,11 @@
         </p>
         <div
           @mousemove="handleMousemove(data.cid, $event)"
-          :style="'background-position:' + width + 'px ' + height + 'px; '"
+          :style="`background-position:${width}px  ${height}px; `"
           class="preview"
         >
           <div class="progress-bar">
-            <span :style="'width:' + progress + '%'"></span>
+            <span :style="`width: ${progress}%`" />
           </div>
         </div>
       </a>
@@ -57,8 +57,7 @@ export default {
         el.target.className === "preview"
       ) {
         console.log(el.target.className);
-        el.target.style.backgroundImage =
-          'url("https://i0.hdslb.com/bfs/videoshot/' + cid + '.jpg@.webp")';
+        el.target.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${cid}.jpg@.webp`;
       }
       const value = el.offsetX / el.toElement.scrollWidth;
       const progress = parseFloat(value).toFixed(2) * 100;

@@ -7,13 +7,14 @@
       <a
         @click="handleCurrent(item === 0 ? undefined : item)"
         :class="
-          (current === item ? 'ckeck-item' : '') +
-            (item ? ' number' : 'ellipsis')
+          `${current === item ? 'ckeck-item' : ''} ${
+            item ? ' number' : 'ellipsis'
+          }`
         "
         v-for="item in lists"
         :key="item"
         v-text="item ? item : '...'"
-      ></a>
+      />
       <a
         class="pre "
         v-show="current !== this.pageTotle"

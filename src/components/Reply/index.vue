@@ -16,8 +16,8 @@
       >
         <a href="#">
           <img
-            :src="replyItem.member.avatar + '@52w_52h.webp'"
-            :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+            :src="`${replyItem.member.avatar}@52w_52h.webp`"
+            :onerror="`this.src='${replyItem.member.avatar}'`"
           />
         </a>
       </div>
@@ -26,8 +26,9 @@
           <a
             href="#"
             :class="
-              'username ' +
-                (replyItem.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+              `username ${
+                replyItem.member.vip.vipType !== 0 ? 'vip-red-name' : ''
+              }`
             "
           >
             {{ replyItem.member.uname }}
@@ -36,10 +37,9 @@
             <svg class="svg-icon" aria-hidden="true">
               <use
                 :xlink:href="
-                  '#icon-ic_userlevel_' +
-                    replyItem.member.level_info.current_level
+                  `#icon-ic_userlevel_${replyItem.member.level_info.current_level}`
                 "
-              ></use>
+              />
             </svg>
           </a>
           <a href="#" class="nameplate">
@@ -75,31 +75,31 @@
                   @mouseenter="handleMouseenter(item.member.mid, $event)"
                   @mouseleave="handleMouseleave"
                   class="reply-pic"
-                  :src="item.member.avatar + '@52w_52h.webp'"
-                  :onerror="'this.src=' + '\'' + replyItem.member.avatar + '\''"
+                  :src="`${item.member.avatar}@52w_52h.webp`"
+                  :onerror="`this.src='${replyItem.member.avatar}'`"
                 />
               </a>
               <div class="user-text">
                 <a
                   href="#"
                   :class="
-                    'username ' +
-                      (item.member.vip.vipType !== 0 ? 'vip-red-name' : '')
+                    `username ${
+                      item.member.vip.vipType !== 0 ? 'vip-red-name' : ''
+                    }`
                   "
                   >{{ item.member.uname }}</a
                 >
                 <svg class="svg-icon level" aria-hidden="true">
                   <use
                     :xlink:href="
-                      '#icon-ic_userlevel_' +
-                        item.member.level_info.current_level
+                      `#icon-ic_userlevel_${item.member.level_info.current_level}`
                     "
-                  ></use>
+                  />
                 </svg>
                 <span
                   class="reply-text"
                   v-html="transilation(item.content.message)"
-                ></span>
+                />
               </div>
             </div>
             <div class="info">
@@ -154,9 +154,6 @@ export default {
     }
   },
   methods: {
-    level(value) {
-      return "icon-ic_userlevel_" + value;
-    },
     transilation(value) {
       let exp = /['\n']/g;
       let x = value.replace(exp, "<br/>");

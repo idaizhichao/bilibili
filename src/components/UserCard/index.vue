@@ -1,23 +1,23 @@
 <template>
   <div
     class="card"
-    :style="'left:' + left + 'px; top:' + top + 'px'"
+    :style="`left:${left}px; top: ${top}px`"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
     <div
       class="bg"
-      :style="'background-image:url(' + member.space.s_img + '@750w_240h.webp)'"
+      :style="`background-image:url(${member.space.s_img}@750w_240h.webp)`"
     ></div>
     <a href="#" class="face">
-      <img :src="member.card.face + '@50w_50h.webp'" />
+      <img :src="`${member.card.face}@50w_50h.webp`" />
     </a>
     <div class="info">
       <p class="user-name">
         <a
-          class="#"
+          href="#"
           :class="
-            'username ' + (member.card.vip.vipType !== 0 ? 'vip-red-name' : '')
+            `username ${member.card.vip.vipType !== 0 ? 'vip-red-name' : ''}`
           "
         >
           {{ member.card.name }}</a
@@ -32,9 +32,9 @@
           <svg class="svg-icon" aria-hidden="true">
             <use
               :xlink:href="
-                '#icon-ic_userlevel_' + member.card.level_info.current_level
+                `'#icon-ic_userlevel_${member.card.level_info.current_level}`
               "
-            ></use>
+            />
           </svg>
         </a>
       </p>

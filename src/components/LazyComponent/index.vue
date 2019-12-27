@@ -1,5 +1,5 @@
 <template>
-  <div ref="lazy" :style="'min-height: ' + height + 'px'">
+  <div ref="lazy" :style="`min-height: ' + $(height) + 'px`">
     <slot v-if="isShow" />
   </div>
 </template>

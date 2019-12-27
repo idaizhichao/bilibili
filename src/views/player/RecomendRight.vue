@@ -36,7 +36,7 @@
       <div class="card-box" v-for="item in recommendCopy" :key="item.aid">
         <div class="pic">
           <a
-            :href="'/player/av' + item.aid"
+            :href="`/player/av${item.aid}`"
             @click.prevent="handleVideoCheck(item.aid)"
           >
             <img :src="item.pic + '@336w_190h.webp'" />
@@ -45,7 +45,7 @@
         <div class="info">
           <a
             class="info-title"
-            :href="'/player/av' + item.aid"
+            :href="`/player/av${item.aid}`"
             @click.prevent="handleVideoCheck(item.aid)"
             :title="item.title"
             v-text="item.title"

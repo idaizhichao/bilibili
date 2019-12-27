@@ -11,7 +11,7 @@
           >
           <div class="table-switch" v-if="isTimeLine">
             <div
-              :class="'item ' + (index + 1 === checkedWeek ? 'item-on' : '')"
+              :class="`item  ${index + 1 === checkedWeek ? 'item-on' : ''}`"
               @click="handleTabSwitch(index + 1)"
               v-for="(item, index) in timeLine"
               :key="item.date"
@@ -35,11 +35,7 @@
         </slot>
       </header>
       <div>
-        <div
-          v-if="!isTimeLine"
-          class="l-con"
-          :style="'height:' + conHeight + 'px'"
-        >
+        <div v-if="!isTimeLine" class="l-con" :style="`height: ${conHeight}px`">
           <Commend-Card
             v-for="item in dynamic.archives"
             :key="item.aid"
@@ -61,12 +57,12 @@
           v-for="(item, index) in rankList"
           :key="item.aid"
         >
-          <span :class="'number ' + (index < 3 ? 'top-three' : '')">
+          <span :class="`number ${index < 3 ? 'top-three' : ''}`">
             {{ index + 1 }}
           </span>
           <a
             target="_blank"
-            :href="'/player/av' + item.aid"
+            :href="`/player/av${item.aid}`"
             class="title fontHover"
             v-if="index && !isTimeLine"
           >
@@ -76,7 +72,7 @@
           </a>
           <a
             target="_blank"
-            :href="'/player/av' + item.aid"
+            :href="`/player/av${item.aid}`"
             class="title fontHover"
             v-if="isTimeLine"
           >
@@ -91,15 +87,15 @@
           </a>
           <div class="preview" v-if="!index && !isTimeLine">
             <div class="pic">
-              <a target="_blank" :href="'/player/av' + item.aid">
-                <img :src="item.pic + '@112w_63h_1c_100q.webp'" />
+              <a target="_blank" :href="`/player/av${item.aid}`">
+                <img :src="`${item.pic}@112w_63h_1c_100q.webp`" />
               </a>
             </div>
             <div class="txt">
               <p :title="item.title">
                 <a
                   target="_blank"
-                  :href="'/player/av' + item.aid"
+                  :href="`/player/av${item.aid}`"
                   class="fontHover"
                   >{{ item.title }}
                 </a>
