@@ -31,8 +31,10 @@
         </div>
         <div class="player-video">
           <video
+            controls="controls"
+            autoplay="autoplay"
+            preload="none"
             ref="video"
-            @click="handleVideoClick"
             :src="videoInfo.initUrl"
             :poster="videoInfo.pic"
           />
