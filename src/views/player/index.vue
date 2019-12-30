@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     handleVideoClick() {
-      console.log(this.$refs.video.paused);
       if (this.$refs.video.paused) {
         this.$refs.video.play();
       } else {
@@ -98,7 +97,6 @@ export default {
     },
     getVideoInfo() {
       video.getVideoInfo(this.aId).then(res => {
-        console.log(res);
         this.videoData = res.data;
         this.videoInfo = res.data.videoInfo;
         this.stat = res.data.videoInfo.stat;
@@ -122,7 +120,6 @@ export default {
     },
     getReply(aid, index) {
       video.getReply(aid, index).then(res => {
-        console.log(res);
         this.page = res.data.page;
         this.replies = res.data.replies;
       });

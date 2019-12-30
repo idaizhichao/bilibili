@@ -21,56 +21,43 @@
       </template>
     </Partition>
     <Partition :title="'游戏'" :icon="'#icon-youxi'" :rId="4"> </Partition>
-    <lazy-component :height="468">
-      <Partition :title="'舞蹈'" :icon="'#icon-guixu'" :rId="129"> </Partition>
-    </lazy-component>
-    <lazy-component :height="468">
-      <Partition :title="'动画'" :icon="'#icon-fanju'" :rId="1"> </Partition>
-    </lazy-component>
-    <lazy-component :height="468">
-      <Partition
-        :title="'音乐'"
-        :icon="'#icon-tubiaozhizuomobanyihuifu-'"
-        :rId="3"
-      >
-      </Partition>
-    </lazy-component>
-    <lazy-component :height="468">
-      <Partition :title="'娱乐'" :icon="'#icon-youxi'" :rId="5"> </Partition>
-    </lazy-component>
-    <lazy-component :height="468">
-      <Partition
-        :title="'番剧'"
-        :icon="'#icon-fanju'"
-        :conHeight="376"
-        :rId="1"
-        :isTimeLine="true"
-        :isTabSwitch="true"
-      >
-        <template v-slot:custom>
-          <div class="game-custom">
-            <a href="#"> 新番播放时间<i class="iconfont">&#xe644;</i> </a>
-          </div>
-        </template>
-      </Partition>
-    </lazy-component>
-    <lazy-component :height="468">
-      <Partition :title="'番剧动态'" :icon="'#icon-fanjutuijian'" :rId="1">
-      </Partition>
-    </lazy-component>
+    <Partition :title="'舞蹈'" :icon="'#icon-guixu'" :rId="129"> </Partition>
+    <Partition :title="'动画'" :icon="'#icon-fanju'" :rId="1"> </Partition>
+    <Partition
+      :title="'音乐'"
+      :icon="'#icon-tubiaozhizuomobanyihuifu-'"
+      :rId="3"
+    >
+    </Partition>
+    <Partition :title="'娱乐'" :icon="'#icon-youxi'" :rId="5"> </Partition>
+    <Partition
+      :title="'番剧'"
+      :icon="'#icon-fanju'"
+      :conHeight="376"
+      :rId="1"
+      :isTimeLine="true"
+      :isTabSwitch="true"
+    >
+      <template v-slot:custom>
+        <div class="game-custom">
+          <a href="#"> 新番播放时间<i class="iconfont">&#xe644;</i> </a>
+        </div>
+      </template>
+    </Partition>
+    <Partition :title="'番剧动态'" :icon="'#icon-fanjutuijian'" :rId="1">
+    </Partition>
   </div>
 </template>
 
 <script>
 import Recommend from "./Recommend";
 import Partition from "./Partition";
-import { LazyComponent } from "@/components";
+// import { LazyComponent } from "@/components";
 export default {
   name: "index",
   components: {
     Recommend,
-    Partition,
-    LazyComponent
+    Partition
   },
   data() {
     return {

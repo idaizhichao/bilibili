@@ -1,5 +1,5 @@
 <template>
-  <div ref="lazy" :style="`min-height: ' + $(height) + 'px`">
+  <div ref="lazy" :style="`min-height: ${height}px`">
     <slot v-if="isShow" />
   </div>
 </template>
@@ -30,7 +30,6 @@ export default {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
           observer.unobserve(entry.target);
-          console.log(entry.target);
           _this.isShow = true;
         }
       });

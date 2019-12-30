@@ -41,5 +41,25 @@ const AppDeviceEnquire = {
     });
   }
 };
+const LazyComponent = {
+  mounted() {
+    let _this = this;
+    // 创建一个观察者
+    let observer = new IntersectionObserver(onIntersection);
+    let lazy = this.$refs.lazy;
+    //监听 lazy 这个DOM 节点
+    observer.observe(lazy);
 
-export { AppDeviceEnquire, mixinDevice };
+    // 定义回调
+    function onIntersection(entries) {
+      entries.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          observer.unobserve(entry.target);
+          console.log(entry.target);
+          _this.isSendRequest = true;
+        }
+      });
+    }
+  }
+};
+export { AppDeviceEnquire, mixinDevice, LazyComponent };

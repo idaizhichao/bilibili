@@ -113,13 +113,14 @@
 import { CommendCard } from "@/components";
 import { rank, region, main } from "@/api";
 import TimeLineCard from "./TimeLineCard";
-
+import { LazyComponent } from "@/utils/mixin";
 export default {
   name: "Parttion",
   components: {
     CommendCard,
     TimeLineCard
   },
+  mixins: [LazyComponent],
   props: {
     change: {
       type: Boolean,
@@ -164,7 +165,8 @@ export default {
       dynamic: [],
       timeLine: [],
       lists: [],
-      checkedWeek: 1
+      checkedWeek: 1,
+      isSendRequest: false
     };
   },
   filters: {
@@ -220,10 +222,8 @@ export default {
     },
     // 处理切换日期点击
     handleTabSwitch(week) {
-      console.log(week);
       this.timeLine.map((item, index) => {
         if (item.day_of_week === week) {
-          console.log(index);
           this.lists = this.timeLine[index];
           this.checkedWeek = week;
           return;
@@ -232,27 +232,29 @@ export default {
     },
     // 获取时间线数据
     getTimeLine(types) {
-      console.log(types);
       main.getTimeLine(types).then(res => {
         this.timeLine = res.data;
         res.data.map((item, index) => {
           if (item.is_today === 1) {
             this.checkedWeek = item.day_of_week;
             this.lists = res.data[index];
-            console.log(this.lists);
             return;
           }
         });
       });
     }
   },
-  mounted() {
-    if (this.isTimeLine) {
-      this.getRankSeason(this.rId, this.day);
-      this.getTimeLine(this.rId);
-    } else {
-      this.getRegion(this.rId, this.day);
-      this.getRegionDynamic(this.rId, this.ps);
+  watch: {
+    isSendRequest() {
+      if (this.isSendRequest === true) {
+        if (this.isTimeLine) {
+          this.getRankSeason(this.rId, this.day);
+          this.getTimeLine(this.rId);
+        } else {
+          this.getRegion(this.rId, this.day);
+          this.getRegionDynamic(this.rId, this.ps);
+        }
+      }
     }
   }
 };

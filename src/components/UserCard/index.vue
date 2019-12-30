@@ -78,7 +78,7 @@ export default {
           },
           space: {
             s_img:
-              "//i1.hdslb.com/bfs/space/718eac8c71e29b8a80431c46110805c3a40e30a6.jpg@750w_240h.webp"
+              "//i1.hdslb.com/bfs/space/718eac8c71e29b8a80431c46110805c3a40e30a6.jpg"
           }
         };
       }

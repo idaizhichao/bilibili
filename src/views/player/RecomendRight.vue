@@ -115,7 +115,6 @@ export default {
   },
   methods: {
     handleVideoCheck(aid) {
-      console.log(aid);
       this.$emit("handleVideoCheck", aid);
     },
     handleOpenClick() {

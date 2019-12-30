@@ -160,11 +160,9 @@ export default {
       return x;
     },
     handleMouseenter(mid, e) {
-      console.log(mid);
       this.isUserCard = true;
       this.top = e.pageY - e.offsetY + e.target.offsetHeight;
       this.left = e.pageX - e.offsetX;
-      console.log(this);
       if (this.mid !== mid) {
         this.mid = mid;
         this.getCardInfo(mid);
@@ -176,7 +174,6 @@ export default {
     getCardInfo(mid) {
       up.getCardInfo(mid).then(res => {
         this.member = res.data;
-        console.log(res.data);
       });
     },
     handleUserCard(type) {

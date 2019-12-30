@@ -77,7 +77,6 @@ export default {
   },
   methods: {
     handleVideoClick() {
-      console.log(this.$refs.video.paused);
       if (this.$refs.video.paused) {
         this.$refs.video.play();
       } else {
