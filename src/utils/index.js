@@ -1,4 +1,5 @@
 import device from "./device";
 import mixin from "./mixin";
+import util from "./util";
 
-export { mixin, device };
+export { mixin, device, util };
