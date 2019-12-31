@@ -218,6 +218,7 @@ p {
     margin-left: 10px;
     color: #999;
     .info-title {
+      max-width: 169px;
       color: #333;
       line-height: 18px;
       height: 36px;
