@@ -23,7 +23,7 @@
       >
     </div>
     <div class="skip">
-      <span>共97页，跳转至</span
+      <span>共{{ pageTotle }}页，跳转至</span
       ><input type="text" class="p-input" v-model="skip" />页
       <button class="p-button" @click="handleButtonClick">
         提交
@@ -52,6 +52,13 @@ export default {
       return Math.ceil(this.totle / this.pageSize);
     },
     lists() {
+      if (this.pageTotle < 6) {
+        let result = [];
+        for (let i = 0; i < this.pageTotle; i++) {
+          result.push(i + 1);
+        }
+        return result;
+      }
       if (this.current < 5) {
         return [1, 2, 3, 4, 5, 6, undefined, this.pageTotle];
       }
