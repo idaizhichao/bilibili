@@ -35,6 +35,7 @@
             @loadedmetadata="handleLoadMetaData"
             @timeupdate="handleTimeUpdate"
             @click="handleVideoClick"
+            @progress="handleVideoProgress"
             :src="videoInfo.initUrl"
           />
         </div>
@@ -43,14 +44,18 @@
             <div>
               <div
                 class="video-control-bar"
-                @click="handleControlBarClick"
+                @click.stop="handleControlBarClick"
                 @mousemove="handleControlBarMousemove"
                 @mouseleave="handleControlBarMouseleave"
                 ref="controlBar"
               >
                 <div
-                  class="load-bar"
-                  :style="`transform:scaleX(${scaleX})`"
+                  class="play-bar"
+                  :style="`transform:scaleX(${playScaleX})`"
+                ></div>
+                <div
+                  class="buffer-bar"
+                  :style="`transform:scaleX(${bufferScaleX})`"
                 ></div>
               </div>
               <div
@@ -76,21 +81,21 @@
             </div>
             <div class="video-control-bottom">
               <div class="bottom-left">
-                <icon class="iconfont play-button" @click="handleVideoClick">{{
-                  isPlay === false ? "&#xe640;" : "&#xe784;"
-                }}</icon>
+                <i class="iconfont play-button" @click="handleVideoClick">{{
+                  isPlay === false ? "&#xe784;" : "&#xe640;"
+                }}</i>
                 <span class="play-tiem">{{ current }} / {{ duration }}</span>
               </div>
               <div class="bottom-right">
                 <div class="right-item">
                   <span title="弹幕设置"
-                    ><icon class="iconfont play-button ">&#xe628;</icon></span
+                    ><i class="iconfont play-button ">&#xe628;</i></span
                   >
                 </div>
                 <div class="right-item">
                   <div class="autio-bar"></div>
                   <span title="音量设置"
-                    ><icon class="iconfont  play-button">&#xe732;</icon></span
+                    ><i class="iconfont  play-button">&#xe732;</i></span
                   >
                 </div>
                 <div class="right-item">
@@ -98,12 +103,12 @@
                 </div>
                 <div class="right-item">
                   <span title="设置"
-                    ><icon class="iconfont play-button ">&#xe71b;</icon></span
+                    ><i class="iconfont play-button ">&#xe71b;</i></span
                   >
                 </div>
                 <div class="right-item">
                   <span title="全屏"
-                    ><icon class="iconfont play-button">&#xe828;</icon></span
+                    ><i class="iconfont play-button">&#xe828;</i></span
                   >
                 </div>
               </div>
@@ -150,7 +155,9 @@ export default {
       positionWidth: 0,
       positionHeight: 0,
       isPlay: false,
-      scaleX: 0
+      playScaleX: 0,
+      bufferScaleX: 0,
+      video: this.$refs.video
     };
   },
   filters: {
@@ -160,38 +167,51 @@ export default {
       }
     }
   },
+  mounted() {
+    this.video = this.$refs.video;
+  },
   methods: {
     handleVideoClick() {
       let videoElement = this.$refs.video;
-      this.isPlay =
+      this.isPlay = !(
         videoElement.currentTime > 0 &&
         !videoElement.paused &&
         !videoElement.ended &&
-        videoElement.readyState > 2;
-      if (!this.isPlay) {
+        videoElement.readyState > 2
+      );
+      if (this.isPlay) {
         videoElement.play();
       } else {
         videoElement.pause();
       }
       return false;
     },
-    handleTimeUpdate() {
-      this.current = timeFormat(Math.round(this.$refs.video.currentTime));
-      this.scaleX = parseFloat(
-        this.$refs.video.currentTime / this.$refs.video.duration
+    // 视频加载中的事件
+    handleVideoProgress() {
+      this.bufferScaleX = parseFloat(
+        this.video.buffered.end(this.video.buffered.length - 1) /
+          this.video.duration
       ).toFixed(4);
     },
-    handleLoadMetaData() {
-      this.duration = timeFormat(Math.round(this.$refs.video.duration));
+    // 视频播放时的事件
+    handleTimeUpdate() {
+      this.current = timeFormat(Math.round(this.video.currentTime));
+      this.playScaleX = parseFloat(
+        this.video.currentTime / this.video.duration
+      ).toFixed(4);
     },
+    // 视频元素据加载事件
+    handleLoadMetaData() {
+      this.playScaleX = 0;
+      this.bufferScaleX = 0;
+      this.duration = timeFormat(Math.round(this.video.duration));
+    },
+    // 时间条上图片预览
     handleControlBarMousemove(e) {
       if (!this.$refs.preview.style.backgroundImage) {
         this.$refs.preview.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${this.videoInfo.cid}.jpg@.webp`;
       }
-
       this.mouseCurrent = e.layerX;
-      // console.log(e.target)
-      // console.log(e.target.offsetWidth)
       this.isCurrent = true;
       const value = e.layerX / e.target.offsetWidth;
       const progress = parseFloat(value).toFixed(2) * 100;
@@ -210,12 +230,20 @@ export default {
         this.positionHeight = -90;
       }
     },
+    // 鼠标离开时间条事件
     handleControlBarMouseleave() {
       this.isCurrent = false;
     },
+    // 处理时间条点击事件
     handleControlBarClick(e) {
-      this.$refs.video.currentTime =
-        this.$refs.video.duration * (e.offsetX / e.target.scrollWidth);
+      let toTime =
+        this.video.duration * (e.layerX / e.currentTarget.scrollWidth);
+      this.$refs.video.currentTime = toTime;
+      setTimeout(() => {
+        this.bufferScaleX = parseFloat(
+          this.$refs.video.currentTime / this.$refs.video.duration
+        ).toFixed(4);
+      }, 200);
     }
   }
 };
@@ -246,6 +274,7 @@ h1 {
     background-color: #000;
     color: #fff;
     .player-video-top {
+      z-index: 10;
       opacity: 0;
       transition: opacity 0.5s;
       top: 10px;
@@ -330,14 +359,22 @@ h1 {
   background: hsla(0, 0%, 100%, 0.2);
   height: 12px;
   position: relative;
-  .load-bar {
+  .buffer-bar,
+  .play-bar {
     position: absolute;
     bottom: 1px;
     width: 100%;
     transform-origin: 0%;
     left: 0;
     height: 4px;
+  }
+  .buffer-bar {
+    background-color: green;
+    z-index: 1;
+  }
+  .play-bar {
     background-color: red;
+    z-index: 20;
   }
 }
 .current-locaction {
