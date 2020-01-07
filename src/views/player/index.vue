@@ -1,30 +1,45 @@
 <template>
   <div class="v-wrapper">
     <div class="l-con">
-      <player-left
-        @getVideoInfo="getVideoInfo"
-        @getRecommend="getRecommend"
-        :videoInfo="videoInfo"
-        :owner="owner"
-        :stat="videoInfo.stat"
-      ></player-left>
+      <div>
+        <div class="video-info">
+          <h1 class="video-data" v-text="videoInfo.originTitle" />
+          <p class="video-data">
+            <a href="#" class="type" v-text="videoInfo.toptype" />
+            >&nbsp;
+            <a href="#" class="type" v-text="videoInfo.tname" />
+            <span>{{ videoInfo.pubdate | timeStamp }}</span>
+          </p>
+          <p class="video-data">
+            <span>{{ stat.view | number }}</span>
+            ·
+            <span>{{ stat.danmaku | number }} 弹幕</span>
+            <span>未经作者授权，禁止转载</span>
+          </p>
+        </div>
+        <BiVideo
+          :cid="videoInfo.cid"
+          :videoUrl="videoInfo.initUrl"
+          :upFace="owner.face"
+        />
+      </div>
       <toolbar
         :stat="videoInfo.stat"
         :videoTag="videoData.videoTag"
         :videoDes="videoInfo.desc"
-      ></toolbar>
-      <reply :replies="replies"></reply>
+      />
+      <reply :replies="replies" />
       <pagination @change="handlePaginationChange" :totle="page.count">
       </pagination>
     </div>
     <div>
-      <recommend-right
+      <RecommendRight
         :recommend="recommend"
         :videoInfo="videoInfo"
         :owner="owner"
         :userState="videoData.userState"
         @handleVideoCheck="handleVideoCheck"
-      ></recommend-right>
+      />
     </div>
   </div>
 </template>
@@ -35,7 +50,7 @@ import { video } from "@/api";
 import { Reply, Pagination } from "@/components";
 import RecommendRight from "./RecomendRight";
 import Toolbar from "./Toolbar";
-import PlayerLeft from "./PlayerLeft";
+import Video from "./Video";
 import moment from "moment";
 export default {
   name: "Player",
@@ -44,7 +59,7 @@ export default {
     Toolbar,
     Reply,
     Pagination,
-    PlayerLeft
+    BiVideo: Video
   },
   data() {
     return {
@@ -145,5 +160,18 @@ p {
   .l-con {
     width: 1044px;
   }
+}
+
+.video-data {
+  margin-bottom: 12px;
+  a,
+  span {
+    margin-right: 5px;
+    color: #999;
+  }
+}
+h1 {
+  font-size: 18px;
+  color: #333;
 }
 </style>

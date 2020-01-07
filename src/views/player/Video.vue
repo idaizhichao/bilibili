@@ -1,116 +1,96 @@
 <template>
-  <div>
-    <div class="video-info">
-      <h1 class="video-data" v-text="videoInfo.originTitle"></h1>
-      <p class="video-data">
-        <a href="#" class="type" v-text="videoInfo.toptype"></a>
-        >&nbsp;
-        <a href="#" class="type" v-text="videoInfo.tname"></a>
-        <span>{{ videoInfo.pubdate | timeStamp }}</span>
-      </p>
-      <p class="video-data">
-        <span>{{ stat.view | number }}</span>
-        ·
-        <span>{{ stat.danmaku | number }} 弹幕</span>
-        <span>未经作者授权，禁止转载</span>
-      </p>
-    </div>
-    <div class="video-player">
-      <div class="play-video-wrap">
-        <div class="player-video-top">
-          <div class="video-title"></div>
-          <div class="follow">
-            <div>
-              <img :src="owner.face" />
-            </div>
-            <span>+关注</span>
+  <div class="video-player">
+    <div class="play-video-wrap">
+      <div class="player-video-top">
+        <div class="video-title"></div>
+        <div class="follow">
+          <div>
+            <img :src="upFace" />
           </div>
-          <div class="feedback">
-            反馈
-          </div>
+          <span>+关注</span>
         </div>
-        <div class="player-video">
-          <video
-            ref="video"
-            @loadedmetadata="handleLoadMetaData"
-            @timeupdate="handleTimeUpdate"
-            @click="handleVideoClick"
-            @progress="handleVideoProgress"
-            :src="videoInfo.initUrl"
-          />
+        <div class="feedback">
+          反馈
         </div>
-        <div class="player-control">
-          <div class="video-control">
-            <div>
-              <div
-                class="video-control-bar"
-                @click.stop="handleControlBarClick"
-                @mousemove="handleControlBarMousemove"
-                @mouseleave="handleControlBarMouseleave"
-                ref="controlBar"
-              >
-                <div
-                  class="play-bar"
-                  :style="`transform:scaleX(${playScaleX})`"
-                ></div>
-                <div
-                  class="buffer-bar"
-                  :style="`transform:scaleX(${bufferScaleX})`"
-                ></div>
-              </div>
-              <div
-                class="current-locaction"
-                :style="`left: ${mouseCurrent}px`"
-                v-show="isCurrent"
-              >
-                <span class="top"></span>
-                <span class="bottom"></span>
-              </div>
-            </div>
+      </div>
+      <div class="player-video">
+        <video
+          ref="video"
+          @loadedmetadata="handleLoadMetaData"
+          @timeupdate="handleTimeUpdate"
+          @click="handleVideoClick"
+          @progress="handleVideoProgress"
+          :src="videoUrl"
+        />
+      </div>
+      <div class="player-control">
+        <div class="video-control">
+          <div>
             <div
-              :style="`margin-left:${mouseCurrent - 80}px`"
-              v-show="isCurrent"
+              class="video-control-bar"
+              @click.stop="handleControlBarClick"
+              @mousemove="handleControlBarMousemove"
+              @mouseleave="handleControlBarMouseleave"
+              ref="controlBar"
             >
               <div
-                class="preview"
-                ref="preview"
-                :style="
-                  `background-position: ${positionWidth}px ${positionHeight}px`
-                "
+                class="play-bar"
+                :style="`transform:scaleX(${playScaleX})`"
+              ></div>
+              <div
+                class="buffer-bar"
+                :style="`transform:scaleX(${bufferScaleX})`"
               ></div>
             </div>
-            <div class="video-control-bottom">
-              <div class="bottom-left">
-                <i class="iconfont play-button" @click="handleVideoClick">{{
-                  isPlay === false ? "&#xe784;" : "&#xe640;"
-                }}</i>
-                <span class="play-tiem">{{ current }} / {{ duration }}</span>
+            <div
+              class="current-locaction"
+              :style="`left: ${mouseCurrent}px`"
+              v-show="isCurrent"
+            >
+              <span class="top" />
+              <span class="bottom" />
+            </div>
+          </div>
+          <div :style="`margin-left:${mouseCurrent - 80}px`" v-show="isCurrent">
+            <div
+              class="preview"
+              ref="preview"
+              :style="
+                `background-position: ${positionWidth}px ${positionHeight}px`
+              "
+            ></div>
+          </div>
+          <div class="video-control-bottom">
+            <div class="bottom-left">
+              <i class="iconfont play-button" @click="handleVideoClick">{{
+                isPlay === false ? "&#xe784;" : "&#xe640;"
+              }}</i>
+              <span class="play-tiem">{{ current }} / {{ duration }}</span>
+            </div>
+            <div class="bottom-right">
+              <div class="right-item">
+                <span title="弹幕设置"
+                  ><i class="iconfont play-button ">&#xe628;</i></span
+                >
               </div>
-              <div class="bottom-right">
-                <div class="right-item">
-                  <span title="弹幕设置"
-                    ><i class="iconfont play-button ">&#xe628;</i></span
-                  >
-                </div>
-                <div class="right-item">
-                  <div class="autio-bar"></div>
-                  <span title="音量设置"
-                    ><i class="iconfont  play-button">&#xe732;</i></span
-                  >
-                </div>
-                <div class="right-item">
-                  <span title="清晰度选择" class="play-button">自动</span>
-                </div>
-                <div class="right-item">
-                  <span title="设置"
-                    ><i class="iconfont play-button ">&#xe71b;</i></span
-                  >
-                </div>
-                <div class="right-item">
-                  <span title="全屏"
-                    ><i class="iconfont play-button">&#xe828;</i></span
-                  >
-                </div>
+              <div class="right-item">
+                <div class="audio-bar"></div>
+                <span title="音量设置"
+                  ><i class="iconfont  play-button">&#xe732;</i></span
+                >
+              </div>
+              <div class="right-item">
+                <span title="清晰度选择" class="play-button">自动</span>
+              </div>
+              <div class="right-item">
+                <span title="设置"
+                  ><i class="iconfont play-button ">&#xe71b;</i></span
+                >
+              </div>
+              <div class="right-item" @click="handleFullscreen">
+                <span title="全屏"
+                  ><i class="iconfont play-button">&#xe828;</i></span
+                >
               </div>
             </div>
           </div>
@@ -121,31 +101,9 @@
 </template>
 
 <script>
-import moment from "moment";
 import { timeFormat } from "@/utils/util";
-
 export default {
-  name: "PlayerLeft",
-  props: {
-    videoInfo: {
-      type: Object,
-      default: () => {}
-    },
-    owner: {
-      type: Object,
-      default: () => {
-        return {
-          pubdate: "-"
-        };
-      }
-    },
-    stat: {
-      type: Object,
-      default: () => {
-        return { danmaku: "-", view: "-" };
-      }
-    }
-  },
+  name: "Video",
   data() {
     return {
       duration: "00:00",
@@ -160,11 +118,18 @@ export default {
       video: this.$refs.video
     };
   },
-  filters: {
-    timeStamp: value => {
-      if (value !== "-") {
-        return moment(value, "X").format("YYYY-MM-DD hh:mm:ss");
-      }
+  props: {
+    upFace: {
+      type: String,
+      require: true
+    },
+    videoUrl: {
+      type: String,
+      require: true
+    },
+    cid: {
+      type: Number,
+      require: true
     }
   },
   mounted() {
@@ -209,7 +174,7 @@ export default {
     // 时间条上图片预览
     handleControlBarMousemove(e) {
       if (!this.$refs.preview.style.backgroundImage) {
-        this.$refs.preview.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${this.videoInfo.cid}.jpg@.webp`;
+        this.$refs.preview.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${this.cid}'.jpg@.webp`;
       }
       this.mouseCurrent = e.layerX;
       this.isCurrent = true;
@@ -236,32 +201,23 @@ export default {
     },
     // 处理时间条点击事件
     handleControlBarClick(e) {
-      let toTime =
+      this.video.currentTime =
         this.video.duration * (e.layerX / e.currentTarget.scrollWidth);
-      this.$refs.video.currentTime = toTime;
       setTimeout(() => {
         this.bufferScaleX = parseFloat(
           this.$refs.video.currentTime / this.$refs.video.duration
         ).toFixed(4);
       }, 200);
+    },
+    // 全屏
+    handleFullscreen() {
+      this.video.webkitRequestFullScreen();
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.video-data {
-  margin-bottom: 12px;
-  a,
-  span {
-    margin-right: 5px;
-    color: #999;
-  }
-}
-h1 {
-  font-size: 18px;
-  color: #333;
-}
 .video-player {
   height: auto;
   .play-video-wrap {
@@ -369,11 +325,11 @@ h1 {
     height: 4px;
   }
   .buffer-bar {
-    background-color: green;
+    background-color: rgba(255, 255, 255, 0.5);
     z-index: 1;
   }
   .play-bar {
-    background-color: red;
+    background-color: #00a1d6;
     z-index: 20;
   }
 }
