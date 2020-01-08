@@ -174,7 +174,7 @@ export default {
     // 时间条上图片预览
     handleControlBarMousemove(e) {
       if (!this.$refs.preview.style.backgroundImage) {
-        this.$refs.preview.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${this.cid}'.jpg@.webp`;
+        this.$refs.preview.style.backgroundImage = `url("https://i0.hdslb.com/bfs/videoshot/${this.cid}.jpg@.webp`;
       }
       this.mouseCurrent = e.layerX;
       this.isCurrent = true;

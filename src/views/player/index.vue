@@ -126,7 +126,7 @@ export default {
       });
     },
     handleVideoCheck(aid) {
-      var state = { title: "", url: window.location.href };
+      let state = { title: "", url: window.location.href };
       history.pushState(state, "", "av" + aid);
       history.pushState(state, "", "av" + aid);
       this.aId = window.location.href.split("av")[1];
