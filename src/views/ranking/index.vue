@@ -87,8 +87,11 @@ export default {
   },
   methods: {
     getRankingById(rId = this.tid, day = this.day) {
+      if (typeof rId === "number") {
+        this.tid = rId;
+      }
       this.list = [];
-      rank.getRankingById(rId, day).then(res => {
+      rank.getRankingById(this.tid, day).then(res => {
         this.node = res.data.note;
         this.list = res.data.list;
       });
