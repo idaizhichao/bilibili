@@ -50,7 +50,9 @@
       <div class="rank-list" style="margin-left:10px;">
         <header class="rank-header">
           <span>排行榜</span>
-          <a href="#" target="_blink">更多<i class="iconfont">&#xe644;</i></a>
+          <a :href="`/ranking/${rId}`" target="_blink"
+            >更多<i class="iconfont">&#xe644;</i></a
+          >
         </header>
         <div
           class="rank-warp"
