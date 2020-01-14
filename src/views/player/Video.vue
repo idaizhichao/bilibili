@@ -61,24 +61,36 @@
             ></div>
           </div>
           <div class="video-control-bottom">
-            <div class="bottom-left">
+            <div class="bottom-left" @mouseleave="handleVolumeMouseLeave">
               <i class="iconfont play-button" @click="handleVideoClick">{{
                 isPlay === false ? "&#xe784;" : "&#xe640;"
               }}</i>
+              <span
+                title="音量设置"
+                @mouseenter="handleVolumeMouseEnter"
+                @mousedown="handleVolumeMousedown"
+                ><i class="iconfont  play-button">&#xe732;</i></span
+              >
+              <div
+                ondragend=""
+                class="video-volume-bar"
+                ref="volumeBar"
+                @click="handleVolumeBarClick"
+              >
+                <div
+                  class="volume-bar"
+                  :style="`transform: scaleX(${volumeScaleX})`"
+                ></div>
+              </div>
               <span class="play-tiem">{{ current }} / {{ duration }}</span>
             </div>
             <div class="bottom-right">
               <div class="right-item">
-                <span title="弹幕设置"
+                <span title="弹幕设置" @click="handleSettingClick"
                   ><i class="iconfont play-button ">&#xe628;</i></span
                 >
               </div>
-              <div class="right-item">
-                <div class="audio-bar"></div>
-                <span title="音量设置"
-                  ><i class="iconfont  play-button">&#xe732;</i></span
-                >
-              </div>
+
               <div class="right-item">
                 <span title="清晰度选择" class="play-button">自动</span>
               </div>
@@ -115,7 +127,10 @@ export default {
       isPlay: false,
       playScaleX: 0,
       bufferScaleX: 0,
-      video: this.$refs.video
+      video: this.$refs.video,
+      settingIsShow: false,
+      volumeIsShow: false,
+      volumeScaleX: 1
     };
   },
   props: {
@@ -212,6 +227,33 @@ export default {
     // 全屏
     handleFullscreen() {
       this.video.webkitRequestFullScreen();
+    },
+    //  处理设置点击事件
+    handleSettingClick() {},
+    // 处理鼠标移入音量 icon 的事件
+    handleVolumeMouseEnter() {
+      this.volumeIsShow = true;
+    },
+    // 处理关于音频鼠标移出的事件
+    handleVolumeMouseLeave() {
+      this.volumeIsShow = false;
+    },
+    // 处理 volume 点击事件
+    handleVolumeBarClick(e) {
+      let volume = e.layerX / 100;
+      if (volume > 0.95) {
+        volume = 1;
+      }
+      if (volume <= 0.05) {
+        volume = 0;
+      }
+      this.volumeScaleX = volume;
+      this.video.volume = volume;
+      console.log(this.video.volume);
+    },
+    // 处理鼠标拖拽
+    handleVolumeMousedown(e) {
+      console.log(e);
     }
   }
 };
@@ -297,6 +339,8 @@ export default {
   display: flex;
   .bottom-left {
     flex: 1;
+    align-items: center;
+    display: flex;
   }
   .bottom-right {
     display: flex;
@@ -361,5 +405,21 @@ export default {
   bottom: 48px;
   width: 160px;
   height: 90px;
+}
+.video-volume-bar {
+  z-index: 2;
+  cursor: pointer;
+  width: 100px;
+  background: hsla(0, 0%, 100%, 0.4);
+  line-height: 30px;
+  height: 8px;
+  position: relative;
+  margin-right: 6px;
+}
+.volume-bar {
+  transform-origin: left;
+  transform: scaleX(0.75);
+  background-color: #00a1d6;
+  height: 8px;
 }
 </style>
