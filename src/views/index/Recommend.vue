@@ -73,7 +73,8 @@ export default {
     width: 100%;
   }
   .loop-box {
-    width: 550px;
+    min-width: 550px;
+    max-width: 550px;
     height: 242px;
   }
   .recommend-box {

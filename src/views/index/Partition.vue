@@ -204,6 +204,10 @@ export default {
       rank.getRegion(rId, day).then(res => {
         res.data.length = 10;
         this.rankList = res.data;
+        this.rankList = res.data.map(item => {
+          item.pic = item.pic.replace("http", "https");
+          return item;
+        });
       });
     },
     // 获得分区动态
@@ -343,7 +347,8 @@ export default {
 
 // 推广左侧
 .extension-right {
-  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
   .live-list {
     a {
       color: #333;
