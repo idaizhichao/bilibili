@@ -94,6 +94,11 @@ export default {
       rank.getRankingById(this.tid, day).then(res => {
         this.node = res.data.note;
         this.list = res.data.list;
+        this.list.map(item => {
+          item.pic = item.pic.replace("http", "https");
+          return item;
+        });
+        console.log(this.list);
       });
     },
     getRankingPartitions() {
