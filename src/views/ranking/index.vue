@@ -23,9 +23,11 @@
         <div class="num">
           {{ index + 1 }}
         </div>
-        <div class="image">
-          <img :src="`${item.pic}@103w_63h.webp`" />
-        </div>
+        <lazy-component :height="87">
+          <div class="image" ref="lazy">
+            <img :src="`${item.pic}@103w_63h.webp`" />
+          </div>
+        </lazy-component>
         <div class="info">
           <a :href="`/player/av${item.aid}`" class="title" target="_blank">{{
             item.title
@@ -59,8 +61,13 @@
 
 <script>
 import { rank } from "@/api";
+import { LazyComponent } from "@/components";
+
 export default {
   name: "Ranking",
+  components: {
+    LazyComponent
+  },
   data() {
     return {
       list: [],
