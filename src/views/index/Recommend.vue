@@ -37,7 +37,7 @@ export default {
   name: "Recommend",
   data() {
     return {
-      recommend: [1, 2, 3, 4, 5, 6, 7, 8], //首页推荐
+      recommend: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], //首页推荐
       progress: 0,
       height: 0,
       width: 0
@@ -78,7 +78,7 @@ export default {
     height: 242px;
   }
   .recommend-box {
-    width: 854px;
+    width: 1070px;
     height: 242px;
     justify-content: space-between;
     display: flex;
@@ -181,4 +181,29 @@ export default {
   }
 }
 // 推广
+@media screen and(max-width: 1870px) {
+  .recommend-box {
+    width: 854px;
+  }
+  .info-box:nth-of-type(9) {
+    display: none;
+  }
+  .info-box:nth-of-type(10) {
+    display: none;
+  }
+}
+@media screen and(max-width: 1654px ) {
+  .info-box:nth-of-type(7) {
+    display: none;
+  }
+  .info-box:nth-of-type(8) {
+    display: none;
+  }
+  .info-box:nth-of-type(9) {
+    display: none;
+  }
+  .info-box:nth-of-type(10) {
+    display: none;
+  }
+}
 </style>
