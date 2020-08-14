@@ -74,9 +74,43 @@ export default {
 a:visited {
   color: #333;
 }
+@media screen and(max-width: 1870px) {
+  .b-wrap {
+    width: 1414px;
+  }
+  .l-con {
+    width: 1070px;
+  }
+  .l-con-box:nth-of-type(11) {
+    display: none;
+  }
+  .l-con-box:nth-of-type(12) {
+    display: none;
+  }
+}
+@media screen and(max-width: 1654px) {
+  .b-wrap {
+    width: 1198px;
+  }
+  .l-con {
+    width: 854px;
+  }
+  .l-con-box:nth-of-type(9) {
+    display: none;
+  }
+  .l-con-box:nth-of-type(10) {
+    display: none;
+  }
+  .l-con-box:nth-of-type(11) {
+    display: none;
+  }
+  .l-con-box:nth-of-type(12) {
+    display: none;
+  }
+}
 .b-wrap {
   min-width: 1000px;
-  max-width: 1414px;
+  max-width: 1630px;
   margin: 0 auto;
 }
 .space-between {
