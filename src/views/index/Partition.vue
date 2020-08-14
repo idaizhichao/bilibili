@@ -38,7 +38,7 @@
         <div v-if="!isTimeLine" class="l-con" :style="`height: ${conHeight}px`">
           <Commend-Card
             v-for="item in dynamic.archives"
-            :key="item.aid"
+            :key="item.bvid"
             :data="item"
           />
         </div>
@@ -57,14 +57,14 @@
         <div
           class="rank-warp"
           v-for="(item, index) in rankList"
-          :key="item.aid"
+          :key="item.bvid"
         >
           <span :class="`number ${index < 3 ? 'top-three' : ''}`">
             {{ index + 1 }}
           </span>
           <a
             target="_blank"
-            :href="`/player/av${item.aid}`"
+            :href="`/player/${item.bvid}`"
             class="title fontHover"
             v-if="index && !isTimeLine"
           >
@@ -74,7 +74,7 @@
           </a>
           <a
             target="_blank"
-            :href="`/player/av${item.aid}`"
+            :href="`/player/${item.bvid}`"
             class="title fontHover"
             v-if="isTimeLine"
           >
@@ -89,7 +89,7 @@
           </a>
           <div class="preview" v-if="!index && !isTimeLine">
             <div class="pic">
-              <a target="_blank" :href="`/player/av${item.aid}`">
+              <a target="_blank" :href="`/player/${item.bvid}`">
                 <img :src="`${item.pic}@112w_63h_1c_100q.webp`" />
               </a>
             </div>
@@ -97,7 +97,7 @@
               <p :title="item.title">
                 <a
                   target="_blank"
-                  :href="`/player/av${item.aid}`"
+                  :href="`/player/${item.bvid}`"
                   class="fontHover"
                   >{{ item.title }}
                 </a>
@@ -154,7 +154,7 @@ export default {
     },
     ps: {
       type: Number,
-      default: 10
+      default: 12
     },
     isTimeLine: {
       type: Boolean,
@@ -266,11 +266,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/components/public.sass";
 
 .extension-left {
-  width: 1070px;
   i {
     margin-right: 6px;
   }
@@ -334,7 +333,7 @@ export default {
   justify-content: space-between;
   overflow: hidden;
   flex-wrap: wrap;
-  width: 1070px;
+  width: 1286px;
   height: 404px;
 }
 .l-con-box {
@@ -398,6 +397,7 @@ export default {
     }
   }
   .rank-warp {
+    width: 320px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 18px;
@@ -431,7 +431,7 @@ export default {
           text-overflow: ellipsis;
           white-space: nowrap;
         }
-        .txt-updatedd {
+        .txt-update {
           width: 90px;
         }
       }
